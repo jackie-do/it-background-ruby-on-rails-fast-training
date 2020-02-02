@@ -1,4 +1,4 @@
-# Buổi 1
+# Buổi 1: Giới thiệu về Web App. Giới thiệu về Ruby on Rails có thể làm gì.
 
 ## Nội dung cần học
  - Giới thiệu về Web App
