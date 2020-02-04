@@ -27,7 +27,7 @@
 ```
   - HTML cơ bản là một file text, được viết theo cú pháp HTML và có đuôi file là `.html` . Ta có thể đọc file này bằng các trình duyệt phổ biến như Chrome, Firefox, Edge, Opera, Safari ...
   - HTML có các thành phần quan trọng cần biết:
-    - HTML elements, còn biết đến là các HTML tag. Một số tag cần close tag, một số tag không cần [(Link tham khảo)](https://www.w3schools.com/html/html_elements.asp)
+    - HTML elements, bao gồm: tag mở, tag đóng và content ở giữa tag mở và đóng. Một số element cần tag đóng, một số element không cần. Sẽ gọi chung HTML elements = HTML tag [(Link tham khảo)](https://www.w3schools.com/html/html_elements.asp)
     - HTML attributes, là các thuộc tính của HTML elements. Mỗi loại HTML element sẽ có các thuộc tính khác nhau [(Link tham khảo)](https://www.w3schools.com/html/html_attributes.asp)
     - HTML styles, là một thuộc tính đặc biệt của HTML element, dùng để đặc tả style của một element dựa trên CSS inline. [(Link tham khảo)](https://www.w3schools.com/html/html_styles.asp)
 
@@ -107,8 +107,12 @@ p {
   font-size: 20px;
 }
 ```
-2. #### Lưu ý khi sử dụng ID và Class
-  - ID là duy nhất và có độ ưu tiên cao hơn khi mô tả HTML element bằng CSS.
+  - Có 3 cách để sử dụng CSS trong HTML
+    - Inline - Sử dụng attribute `style` trong HTML tag.
+    - Internal - Sử dụng HTML tag `<style> </style>` trong `<head>` để đặc tả CSS.
+    - External - nhúng file css bên ngoài sử dụng HTML tag `<link>`
+2. #### Lưu ý độ ưu tiên khi sử dụng CSS
+  - ID là duy nhất và có độ ưu tiên cao hơn Class khi mô tả HTML element bằng CSS.
 
 3. #### CSS Selectors là gì? Cách sử dụng?
   - CSS Selector để tìm HTML element bạn muốn style. [(Link tham khảo)](https://www.w3schools.com/css/css_selectors.asp)
@@ -145,4 +149,12 @@ p {
 
 
 ### III. Bài tập
+  1. HTML - Tạo trang web offline đầu tiên bằng HTML. [(Demo)](./Lessons/Basic/lesson_02/exercises/exercise_01.html)
+  2. HTML - Thêm metadata vào trang web ở bài tập 1. [(Demo)](./Lessons/Basic/lesson_02/exercises/exercise_02.html)
+  3. HTML - Kiểm tra lỗi HTML bằng **Validator**. [(Demo)](./Lessons/Basic/lesson_02/exercises/exercise_03.html)
+  4. CSS - Sử dụng CSS cho một trang HTML bằng CSS Internal và CSS Inline. [(Demo)](./Lessons/Basic/lesson_02/exercises/exercise_04.html)
+      -  Lưu ý: độ ưu tiên của CSS thông thường sẽ theo thứ tự **CSS Inline > CSS Internal > CSS External**
+  5. CSS - Sử dụng CSS cho một trang HTML bằng CSS External
+
+> Note: Các bạn có thể dùng tool [Validator](https://validator.w3.org/#validate_by_upload) để kiểm tra lỗi HTML của mình bằng cách upfile lên và check.
 
