@@ -58,3 +58,10 @@ Giáo trình dạy Ruby on Rails cho sinh viên IT trong 48h (24 buổi, mỗi b
 3. Bên panel tay phải, ở mục `Assignees` chỉ định người được hỏi. ở mục `Labels` chọn loại **question**.
 4. Viết nội dung cần hỏi theo cú pháp markdown trong tab `Write`. Xem lại ở tab `Preview`
 5. Nhấn `Submit new issues` để hoàn tất.
+
+## IV. Sách tham khảo
+
+1. Tìm hiểu về HTML/CSS
+    - [Sách HTML and CSS workshop](./Books/html_css_book/html-css-workshop-interactive-approach.pdf) - [Code Demo](./Books/html_css_book/code_demo.zip)
+2. Tìm hiểu về Javascript
+    - [Sách](#)
