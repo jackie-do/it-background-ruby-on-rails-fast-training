@@ -1,4 +1,4 @@
-# Buổi 6: Giới thiệu về ngôn ngữ Ruby. Cài đặt Ruby bằng RVM. Giới thiệu về Gem và cách sử dụng.
+# Buổi 6: Ngôn ngữ Ruby.
 
 ## Nội dung cần học
  - Giới thiệu về ngôn ngữ Ruby.
