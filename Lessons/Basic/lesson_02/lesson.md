@@ -154,7 +154,7 @@ p {
   3. HTML - Kiểm tra lỗi HTML bằng **Validator**. [(Demo)](./Lessons/Basic/lesson_02/exercises/exercise_03.html)
   4. CSS - Sử dụng CSS cho một trang HTML bằng CSS Internal và CSS Inline. [(Demo)](./Lessons/Basic/lesson_02/exercises/exercise_04.html)
       -  Lưu ý: độ ưu tiên của CSS thông thường sẽ theo thứ tự **CSS Inline > CSS Internal > CSS External**
-  5. CSS - Sử dụng CSS cho một trang HTML bằng CSS External
+  5. CSS - Sử dụng CSS cho một trang HTML bằng CSS External [(Demo)](./Lessons/Basic/lesson_02/exercises/exercise_05.html)
 
 > Note: Các bạn có thể dùng tool [Validator](https://validator.w3.org/#validate_by_upload) để kiểm tra lỗi HTML của mình bằng cách upfile lên và check.
 
