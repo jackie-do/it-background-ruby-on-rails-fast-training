@@ -1,2 +1,3 @@
 # Dont track temp file in MacOS
 .keep
+.DS_Store
