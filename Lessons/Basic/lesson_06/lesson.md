@@ -247,7 +247,48 @@
             ```
         5. Range [(Link)](https://www.tutorialspoint.com/ruby/ruby_ranges.htm)
         6. Array [(Link)](https://www.tutorialspoint.com/ruby/ruby_arrays.htm)
+            - Array là một collection chứa danh sách các elements theo cấu trúc list. Element có thể là Number, String, Symbol, Hash. Trong một array có thể có nhiều loại element khác nhau.
+            - Một sô cách tạo Array
+            ```ruby
+            # Cách ngắn gọn
+            my_array = [1,2,3]
+            # Cách dùng class
+            my_array = Array.new([1,2,3])
+            my_array = Array.new(3, "ruby")
+
+            my_array = ["ruby", 1, "is", 2, "awesome", 3]
+
+            my_array.each do |element|
+              puts element
+            end
+            ```
         7. Hash  [(Link)](https://www.tutorialspoint.com/ruby/ruby_hashes.htm)
+            - Hash là một collection chứa elements theo cấu trúc key-value. Key phải là giá trị duy nhất (trong cùng cấp). Key có thể là bất cứ loại object nào: Number, String, Symbol, Hash ... và value cũng vậy
+            - Một số cách tạo Hash
+            ```ruby
+            # Cách ngắn gọn
+            my_hash = {}
+            # Cách dùng class
+            my_hash = Hash.new
+
+            my_hash = Hash.new("No Value")
+            my_hash["Non existent key"]
+            my_hash = Hash.new("test")
+            my_hash["No such key"]
+
+            my_hash = {"jan" => 1, "feb" => 2, "mar" => 3}
+
+            my_hash = {}
+            my_hash[:jan] = 1
+            my_hash[:feb] = 2
+            my_hash[:mar] = 3
+            my_hash
+
+            my_hash.each do |key, value|
+              puts "#{key} => #{value}"
+            end
+
+            ```
         6. Variable [(Link)](https://www.tutorialspoint.com/ruby/ruby_variables.htm)
             - Chuẩn đặt tên (naming convention):
               - Variable, Symbol, Method: sử dụng `snake_case`
@@ -303,15 +344,23 @@
               ```
               - **Class Variable - @@var**. Được tạo ra trong một class và có thể được sử dụng ở tất cả instance được tạo ra từ class này và kể cả chính bản thân nó.
 
-    5. Class và Module [(Class)](https://www.tutorialspoint.com/ruby/ruby_classes.htm) - [(Module)](https://www.tutorialspoint.com/ruby/ruby_modules.htm)
+    5. Operations [(Tham khảo)](https://www.tutorialspoint.com/ruby/ruby_operators.htm)
+        - Các operations tính toán: `+`, `-`, `*`, `/`, `%` ...
+        - Các operations so sánh: `==`, `!=`,`>=`, `<=` ...
+        - Các operations gán giá trị: `=`, `+=`, `-=`, `*=` ...
+        - Các operations về logic: `and`, `or`, `&&`, `||`, `!` ...
+        - Operation ba ngôi: `? :`
+        - Oparation về range: `..`, `...`
+        - Bang methods: các method với dấu chấm ! sẽ thay đổi giá trị gốc `upcase!`, `gsub!` ...
+    6. Class và Module [(Class)](https://www.tutorialspoint.com/ruby/ruby_classes.htm) - [(Module)](https://www.tutorialspoint.com/ruby/ruby_modules.htm)
         - Kế thừa giữa các class thế nào?
         - Trong Ruby không hỗ trợ đa kế thừa, nhưng có hỗ trợ mixin module, dùng thế nào?
-    6. Các câu lệnh điều kiện [(Link)](https://www.tutorialspoint.com/ruby/ruby_if_else.htm)
+    7. Các câu lệnh điều kiện [(Link)](https://www.tutorialspoint.com/ruby/ruby_if_else.htm)
         - Câu lệnh với if: `if end`, `if else end`, `if elsif else end`
         - Câu lệnh với unless: `unless end`, `unless else end`
         - Câu lệnh với case: `case when end`, `case when else end`
         - Toán tử 3 ngôi: `expression ? value_when_true : value_when_false`
-    7. Các vòng lặp
+    8. Các vòng lặp
         1. `while`. Ngừng chạy khi expression là false
         ```ruby
         while expression do
@@ -347,10 +396,10 @@
           puts  "Value of  x is  #{x}"
         end
         ```
-    8. Iterator [(Link)](https://www.tutorialspoint.com/ruby/ruby_iterators.htm)
-        - Các methods hỗ trợ làm việc với array/hash: `each`, `map`, `reject`, `filter`...
+    9. Iterator [(Link)](https://www.tutorialspoint.com/ruby/ruby_iterators.htm)
+        - Các methods hỗ trợ làm việc với array/hash: `each`, `each_with_index`, `map`, `reject`, `filter`...
 
-    9. Block [(Link)](https://www.tutorialspoint.com/ruby/ruby_blocks.htm)
+    10. Block [(Link)](https://www.tutorialspoint.com/ruby/ruby_blocks.htm)
 
 ### V. Bài tập
   1. Cài đặt RVM và cài đặt Ruby phiên bản 2.6.3
