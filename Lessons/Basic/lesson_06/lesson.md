@@ -405,7 +405,7 @@
   1. Cài đặt RVM và cài đặt Ruby phiên bản 2.6.3
   2. Tìm hiểu về cách kế thừa giữa các Class trong Ruby.
   3. Phân biệt được cách sử dụng và scope của `public`, `private`, `protected` trong Ruby.
-  4. Cách sử dụng Module trong Ruby. Sử dụng mixin là thế nào? Cách sử dụng các methods `include`, `extend` và `prepend` để "nhét" một Module vào trong một Class.
+  4. Cách sử dụng Module trong Ruby. Sử dụng mixin là thế nào? Cách sử dụng các methods `include`, `extend` và `prepend` để "nhét" một Module vào trong một Class.
   5. Làm quen với các loại dữ liệu phổ biến: String, Number, Array, Hash.
   6. Làm quen với các Iterator phổ biến: `each`, `map`, `reject`, `filter`.
 
