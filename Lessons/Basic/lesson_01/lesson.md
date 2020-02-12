@@ -29,7 +29,7 @@
 ### II. Giới thiệu về Ruby on Rails
 1. Sự ra đời của Ruby on Rails?
   - Ruby + Rails.
-    - Ruby là ngôn ngữ lập trình đuọc tạo ra bởi một người Nhật Yukihiro Matsumoto vào năm 1995. Có 3 loai ngôn ngữ Ruby: MRI(CRuby chạy với các thư viện C), JRuby(chạy với các thư viện Java) và Rubinus (được viết thuần Ruby, ít C). MRI là loại phổ biến nhất và sau này các bạn cũng sẽ làm việc với nó.
+    - Ruby là ngôn ngữ lập trình bậc cao được tạo ra bởi một người Nhật Yukihiro Matsumoto vào năm 1995. Có 3 loại ngôn ngữ Ruby: MRI(CRuby chạy với các thư viện C), JRuby(chạy với các thư viện Java) và Rubinus (được viết thuần Ruby, ít C). MRI là loại phổ biến nhất và sau này các bạn cũng sẽ làm việc với nó.
     - Rails (tên đầy đủ là Ruby on Rails) là một opensource web application framework, được tạo ra bởi David Heinemeier Hansson (gọi tắt là DHH, đấng) vào năm 2005. Đây cũng là framework nổi tiếng nhất của ngôn ngữ Ruby bên cạnh nhưng cái tên ít tên tuổi hơn: Sinatra, Hanami.
   - Ruby on Rails là một Server Side Web Application Framework. Với sự thân thiện và dễ hiểu của ngôn ngữ Ruby, cùng với sự hỗ trợ đâỳ đủ, dễ sử dụng của Rails, Ruby on Rails là một framework được ưa chuộng của nhiều start up Nhật, Âu Mỹ.
     - Ưu điểm:
