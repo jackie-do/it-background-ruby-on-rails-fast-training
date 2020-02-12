@@ -57,7 +57,7 @@
  - Nhu cầu cao cho các start up ở Singapore hoặc Âu Mỹ.
  
 ### V. Bài tập
- 1. Tìm hiểu cách sử dụng markdown để viết Issue. Các highlisht code bằng markdown.
+ 1. Tìm hiểu cách sử dụng markdown để viết Issue. Cách highlight code bằng markdown.
  2. Tìm hiểu cách sử dụng Git cơ bản. 
 
 
