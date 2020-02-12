@@ -35,7 +35,7 @@
     - Ưu điểm:
       - Ngôn ngữ Ruby được tạo bởi người Nhật nên, người Nhật chuộng xài Ruby on Rails.
       - Ngôn ngữ Ruby dễ đọc, dễ xài.
-      - Rails dễ sử dụng, hỗ trợ đầy đủ mọi chức năng mà bạn xài.
+      - Rails dễ sử dụng, hỗ trợ đầy đủ mọi chức năng mà bạn cần.
       - Các thư viện cho Ruby rất đâỳ đủ. Gần như không thiếu gì.
       - Xây dựng ứng dụng cho ra thị trường nhanh.
     - Nhược điểm:
@@ -55,6 +55,10 @@
 ### IV. Cơ hội nghề nghiệp
  - Nhu cầu cao ở các công ty Nhật Bản hoặc outsource cho Nhật
  - Nhu cầu cao cho các start up ở Singapore hoặc Âu Mỹ.
+ 
+### V. Bài tập
+ 1. Tìm hiểu cách sử dụng markdown để viết Issue. Các highlisht code bằng markdown.
+ 2. Tìm hiểu cách sử dụng Git cơ bản. 
 
 
 
