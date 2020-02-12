@@ -5,6 +5,7 @@
  - Giới Ruby on Rails là gì?
  - Các ứng dụng phổ biến nào được xây dựng từ Ruby on Rails.
  - Cơ hội nghề nghiệp
+ - Bài tập
 
 -----
 
