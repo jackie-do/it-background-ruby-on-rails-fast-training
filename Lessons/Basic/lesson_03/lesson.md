@@ -1,27 +1,181 @@
 # Buổi 3: Nói về SCSS (SASS), giới thiệu về các CSS Framework phổ biến
 
 ## Nội dung cần học
- - Học cách sử dụng HTML
- - Học cách sử dụng CSS
+ - SCSS là gì ? Cú pháp và cách sử dụng
+ - Các CSS framework phổ biến
  - Bài tập
 
 -----
 
-### I. Sử dụng HTML
-1. #### HTML là gì? Cú pháp HTML?
-2. #### HTML tag là gì? Các HTML tag phổ biến?
-3. #### HTML attribute là gì? HTML attribute phổ biến?
+### I. SCSS và cách sử dụng
+1. #### CSS Preprocessor là gì?
+    - CSS Preprocessor là ngôn ngữ tiền xử lý của CSS, về cơ bản nó cho phép bạn viết CSS dưới một cú pháp khác gần giống với CSS rồi complie nó ra CSS thuần.
+    - Có rất nhiều CSS Preprocessor phổ biến như: `SASS`, `LESS`, `Stylus` ... CSS Preprocessor mình muốn nói đến trong bài này là **`SASS`**
+    - Từ phiên bản 3.0, SASS có cú pháp mới là SCSS rất gần gủi với cú pháp CSS thuần, giúp viết dễ dàng hơn.
+    - Tất cả các file CSS được viết theo SCSS thì có extension là `.scss`
+2. #### Cú pháp và cách sử dụng
+    ```html
+    <!-- HTML để demo -->
+    <div class="container">
+      <div class="row">
+          <div class="navbar col-12">
+              <a class="brand">Viblo</a>
+              <ul class="menu">
+                  <li><a href="#">Menu 1</a></li>
+                  <li><a href="#">Menu 2</a></li>
+              </ul>
+          </div>
+      </div>
+    </div>
+    ```
+    1. Nested rule (xếp chồng) - Đây là quy tắc được sử dụng phổ biến nhất
+        - Dùng CSS thuần:
+          - Giả sử bạn chỉ muốn CSS cho thẻ ul với class menu, với CSS thuần bạn viết
+          ```css
+          .navbar ul.menu {
+            list-style: none;
+          }
+          ```
+          - Nếu bạn tiếp tục muốn CSS cho thẻ li trong thẻ ul (có class là menu) thì
+          ```css
+          .navbar ul.menu li {
+            padding: 5px;
+          }
+
+          ```
+        - Dùng SCSS, cho phép lồng các class/id con trong class/id cha
+            - Viết dưới dạng SCSS
+            ```SCSS
+            .navbar {
+                ul.menu {
+                    list-style: none;
+
+                    li {
+                        padding: 5px;
+
+                        a {
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+            ```
+            - Được compile ra CSS thuần
+            ```css
+            .navbar ul.menu {
+                list-style: none;
+            }
+            .navbar ul.menu li {
+                padding: 5px;
+            }
+            .navbar ul.menu li a {
+                text-decoration: none;
+            }
+            ```
+
+    2. Variable (Biến)
+        - Biến có thể được dùng để chứa giá trị sử dụng nhiều lần như mã màu, font, kiểu chữ. Để khai báo một biến chúng ta sử dụng `$`.
+        ```SCSS
+        $whiteColor = #fff;
+        .navbar {
+            ul.menu {
+                list-style: none;
+
+                li {
+                    padding: 5px;
+
+                    a {
+                        text-decoration: none;
+                        color: $whitecolor
+                    }
+                }
+            }
+        }
+        ```
+
+    3. Mixin
+        - Gán nhiều thuộc tính nào đó thành một mixin. Khi sử dụng include vào. Sử dụng key `@mixin` và `@include`.
+        ```SCSS
+        // Cách 1, sử dụng không cần tham số
+        @mixin colorVsFont {
+            color: #fff;
+            font-size: 50px;
+        }
+
+        .navbar {
+            ul.menu {
+                list-style: none;
+
+                li {
+                    padding: 5px;
+
+                    a {
+                        text-decoration: none;
+                        @include colorVsFont;
+                    }
+                }
+            }
+        }
+        // Cách 2, sử dụng có tham số
+        @mixin colorVsFont($color, $fontSize) {
+            color: $color;
+            font-size: $fontSize;
+        }
+
+        .navbar {
+            ul.menu {
+                list-style: none;
+
+                li {
+                    padding: 5px;
+
+                    a {
+                        text-decoration: none;
+                        @include colorVsFont(#000, 50px);
+                    }
+                }
+            }
+        }
+        ```
+    4. Import và Extends
+        - Import: tạo nhiều file scss nhỏ rồi import vào file scss lớn sử dụng key `@import`
+        ```SCSS
+        // giả sử có 3 files: header.scss, body.scss và footer.css cùng cấp với file cần import
+        @import 'header';
+        @import 'body';
+        @import 'footer';
+        ```
+
+        - Extends (Kế thừa): định nghĩa ra một class, nếu class khác cần sử dụng thì extends bằng class kia. Tái sử dụng
+        ```SCSS
+        .title-box {
+            color: #dacb46;
+            text-shadow: 1px 1px 1px #1a1a1a;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .navbar {
+            ul.menu {
+                list-style: none;
+
+                li {
+                    padding: 5px;
+
+                    a {
+                        text-decoration: none;
+                        @extend .title-box;
+                    }
+                }
+            }
+        }
+        ```
 
 
-### II. Sử dụng CSS
-1. #### CSS là gì? Cú pháp CSS?
-2. #### Lưu ý khi sử dụng ID và Class
-3. #### Style properties
-4. #### CSS Selectors là gì? cách sử dụng?
-5. #### CSS Properties là gì? Cách sử dụng?
-6. #### CSS pseudo
-  - element states(hover, selected...)
-  - first, last, odd, even, nth-child
+### II. Các CSS framework phổ biến
+1. #### Bulma
+2. #### Bootstrap
+
 
 ### III. Bài tập
 
