@@ -1,27 +1,20 @@
 # Buổi 5: Tiếp tục học về Javascript
 
 ## Nội dung cần học
- - Học cách sử dụng HTML
- - Học cách sử dụng CSS
+ - Sử dụng Javascript trong HTML
+ - Sử dụng Javascript trong HTML mở rộng
  - Bài tập
 
 -----
 
-### I. Sử dụng HTML
-1. #### HTML là gì? Cú pháp HTML?
-2. #### HTML tag là gì? Các HTML tag phổ biến?
-3. #### HTML attribute là gì? HTML attribute phổ biến?
+### I. Sử dụng Javascript trong HTML
+1. #### Công dụng của Javascript khi sử dụng chung với HTML
+2. #### Cách chèn Javascript vào HTML
+3. #### Một số ví dụ
 
 
-### II. Sử dụng CSS
-1. #### CSS là gì? Cú pháp CSS?
-2. #### Lưu ý khi sử dụng ID và Class
-3. #### Style properties
-4. #### CSS Selectors là gì? cách sử dụng?
-5. #### CSS Properties là gì? Cách sử dụng?
-6. #### CSS pseudo
-  - element states(hover, selected...)
-  - first, last, odd, even, nth-child
+### II. Sử dụng Javascript trong HTML mở rộng
+1. #### Tương tác với server
 
 ### III. Bài tập
 

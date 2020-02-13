@@ -10,9 +10,9 @@ Giáo trình dạy Ruby on Rails cho sinh viên IT trong 48h (24 buổi, mỗi b
 **Cơ bản**
 
 - [Buổi 1: Giới thiệu về Web App. Giới thiệu về Ruby on Rails có thể làm gì.](./Lessons/Basic/lesson_01/lesson.md)
-- [Buổi 2: Học về HTML và CSS. Bài tập trong tuần.](./Lessons/Basic/lesson_02/lesson.md)
-- [Buổi 3: Nói về SCSS (SASS), giới thiệu về các CSS Framework phổ biến: Boostrap và Bulma. Bài tập.](./Lessons/Basic/lesson_03/lesson.md)
-- [Buổi 4: Học về Javascript và các phiên bản của Javascript. Cách dùng Javascript trong HTML. Bài tập.](./Lessons/Basic/lesson_04/lesson.md)
+- [Buổi 2: Học về HTML và CSS.](./Lessons/Basic/lesson_02/lesson.md)
+- [Buổi 3: Nói về SCSS (SASS), giới thiệu về các CSS Framework phổ biến.](./Lessons/Basic/lesson_03/lesson.md)
+- [Buổi 4: Học về Javascript.](./Lessons/Basic/lesson_04/lesson.md)
 - [Buổi 5: Tiếp tục học về Javascript. Bài tập làm 1 trang web tĩnh.](./Lessons/Basic/lesson_05/lesson.md)
 - [Buỏi 6: Giới thiệu về ngôn ngữ Ruby. Cài đặt Ruby bằng RVM. Giới thiệu về Gem và cách sử dụng.](./Lessons/Basic/lesson_06/lesson.md)
 - [Buổi 7: Làm bài tập về Ruby.](./Lessons/Basic/lesson_07/lesson.md)
