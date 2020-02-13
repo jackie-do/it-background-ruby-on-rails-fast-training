@@ -65,6 +65,6 @@ Vi du
 1. Tìm hiểu về HTML/CSS
     - [Sách HTML and CSS workshop](./Books/html_css_book/html-css-workshop-interactive-approach.pdf) - [Code Demo](./Books/html_css_book/code_demo.zip)
 2. Tìm hiểu về Javascript
-    - [Sách](#)
+    - [Sách Javascript workshop](./Books/javascript/javascript-workshop-interactive-approach.pdf) - [Code Demo](./Books/javascript/code_demo.zip)
 2. Tìm hiểu về Ruby
     - [Sách Ruby workshop](./Books/ruby/ruby-workshop-practical-development.pdf) - [Code Demo](./Books/ruby/code_demo.zip)
