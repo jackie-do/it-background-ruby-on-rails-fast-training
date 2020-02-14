@@ -4,6 +4,7 @@
  - SCSS là gì ? Cú pháp và cách sử dụng
  - Các CSS framework phổ biến
  - Bài tập
+ - Sách tham khảo
 
 -----
 
@@ -13,6 +14,7 @@
     - Có rất nhiều CSS Preprocessor phổ biến như: `SASS`, `LESS`, `Stylus` ... CSS Preprocessor mình muốn nói đến trong bài này là **`SASS`**
     - Từ phiên bản 3.0, SASS có cú pháp mới là SCSS rất gần gủi với cú pháp CSS thuần, giúp viết dễ dàng hơn.
     - Tất cả các file CSS được viết theo SCSS thì có extension là `.scss`
+
 2. #### Cú pháp và cách sử dụng
     ```html
     <!-- HTML để demo -->
@@ -171,11 +173,62 @@
         }
         ```
 
-
 ### II. Các CSS framework phổ biến
 1. #### Bulma
-2. #### Bootstrap
+    1. Giới thiệu về Bulma ([Trang chủ](https://bulma.io/))
+        - Là một open source CSS framework, được sử dụng để design web. Sử dụng các CSS built-in components để thiết kế mobile-first design.
+    2. Cài đặt Bulma
+        - Cách 1: Download từ trang [bulma.io](https://bulma.io/) và include vào trang HTML để sử dụng
+        - Cách 2: Chèn link vào HTML
+        ```HTML
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+        ```
+        - Cách 3: Cài đặt Bulma bằng npm
 
+
+    3. Tự học Bulma [(Link Tham Khảo)](https://bulma.io/documentation/)
+        - Grid layout
+            - Adding Custom Width
+            - Multiline Columns
+            - Gaps
+            - Nested Columns
+            - Offsets
+        - Utility Classes
+            - Color Modifiers
+            - Alignment Helpers
+            - Responsive Helpers
+            - Typography Helpers
+
+        - Layout CSS helpers
+            - Containers and Levels
+            - Media Object
+            - Banners
+            - Cards and tiles
+            - Callout Panels and Box
+            - Incorporating Footers
+
+        - Navigation and Media components
+            - Navigation components
+                - Breadcrumbs
+                - Drop-Downs
+                - Tabs
+                - Navbar
+            - Media Components
+                - Progress Bars
+                - Notifications
+                - Images
+                - Tags
+                - Pagination
+        - CSS Components and Forms
+          - Buttons
+          - Icons
+          - Content Wrapper
+          - Modals
+          - Forms
+
+2. #### Bootstrap (tự học - [Link Tham Khảo](https://getbootstrap.com/docs/4.4/getting-started/introduction/) )
 
 ### III. Bài tập
 
+### IV. Sách tham khảo
+  - Learning Bulma - [Link](./../../../Books/html_css_book/learning-bulma-understand-responsive-mobile-first.pdf)

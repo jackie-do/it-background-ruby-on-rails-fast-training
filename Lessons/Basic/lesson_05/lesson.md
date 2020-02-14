@@ -2,7 +2,7 @@
 
 ## Nội dung cần học
  - Sử dụng Javascript trong HTML
- - Sử dụng Javascript trong HTML mở rộng
+ - Sử dụng Jquery
  - Bài tập
 
 -----
@@ -13,7 +13,7 @@
 3. #### Một số ví dụ
 
 
-### II. Sử dụng Javascript trong HTML mở rộng
+### II. Sử dụng Jquery
 1. #### Tương tác với server
 
 ### III. Bài tập
