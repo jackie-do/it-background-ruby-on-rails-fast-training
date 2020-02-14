@@ -30,7 +30,6 @@ Giáo trình dạy Ruby on Rails cho sinh viên IT trong 48h (24 buổi, mỗi b
 - [Buổi 19: Hoàn thiện các chức năng website. Tạo phần quản lý site cho admin dùng gem `activeadmin`](./Lessons/Basic/lesson_19/lesson.md)
 - [Buổi 20: Hoàn thiện chức năng site Admin.](./Lessons/Basic/lesson_20/lesson.md)
 
-
 **Nâng cao**
 
 - Buổi 1: Deploy dự án dùng gem `capistrano`

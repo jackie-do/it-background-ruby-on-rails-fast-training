@@ -1,4 +1,4 @@
-# Buổi 7: Giới thiệu về Ruby on Rails framework
+# Buổi 8: Giới thiệu về Ruby on Rails framework
 
 ## Nội dung cần học
  - Tạo một project Rails đầu tiên
