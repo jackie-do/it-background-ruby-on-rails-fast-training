@@ -230,6 +230,7 @@
 
 ### III. Bài tập
   1. Tạo một trang web tĩnh sử dụng Bulma - [Web tham khảo](./exercises/exercise_01.html). Yêu cầu:
+    - Chủ đề bất kì: Giới thiệu bản thân, giới thiệu một ban nhạc ...
     - Sử dụng file `bulma.css` hoặc `bulma.min.css`, làm quen với một số class trong bulma.
     - Phải responsive (thay đổi chế độ hiển thị) cho màn hình di động.
 
