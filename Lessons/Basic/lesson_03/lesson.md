@@ -229,6 +229,9 @@
 2. #### Bootstrap (tự học - [Link Tham Khảo](https://getbootstrap.com/docs/4.4/getting-started/introduction/) )
 
 ### III. Bài tập
+  1. Tạo một trang web tĩnh sử dụng Bulma - [Web tham khảo](./exercises/exercise_01.html). Yêu cầu:
+    - Sử dụng file `bulma.css` hoặc `bulma.min.css`, làm quen với một số class trong bulma.
+    - Phải responsive (thay đổi chế độ hiển thị) cho màn hình di động.
 
 ### IV. Sách tham khảo
   - Learning Bulma - [Link](./../../../Books/html_css_book/learning-bulma-understand-responsive-mobile-first.pdf)
