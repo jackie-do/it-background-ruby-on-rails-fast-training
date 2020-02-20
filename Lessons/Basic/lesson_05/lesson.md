@@ -33,9 +33,9 @@
         - [Fade](https://www.w3schools.com/jquery/jquery_fade.asp)
         - [Slide](https://www.w3schools.com/jquery/jquery_slide.asp)
         - [Animate](https://www.w3schools.com/jquery/jquery_animate.asp)
-        - [Stop] - Dừng các hiệu ứng đang chạy (https://www.w3schools.com/jquery/jquery_stop.asp)
-        - [Callback] - Thêm chức năng xử lý sau khi chạy xong (https://www.w3schools.com/jquery/jquery_callback.asp)
-        - [Chaining] - Nối nhiều hiệu ứng liên tiếp nhau (https://www.w3schools.com/jquery/jquery_chaining.asp)
+        - [Stop](https://www.w3schools.com/jquery/jquery_stop.asp) - Dừng các hiệu ứng đang chạy 
+        - [Callback](https://www.w3schools.com/jquery/jquery_callback.asp) - Thêm chức năng xử lý sau khi chạy xong
+        - [Chaining](https://www.w3schools.com/jquery/jquery_chaining.asp) - Nối nhiều hiệu ứng liên tiếp nhau 
     - Tương tác với HTML DOM
         - Get - Lấy data của một DOM object [(Tham khảo)](https://www.w3schools.com/jquery/jquery_dom_get.asp)
         - Set - Sửa data của một DOM object [(Tham khảo)](https://www.w3schools.com/jquery/jquery_dom_set.asp)
