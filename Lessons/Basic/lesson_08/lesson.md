@@ -57,22 +57,69 @@
     - Lúc này công việc của Rails chỉ còn là nhận request -> xử lý nghiệp vụ -> trả về data cần thiết (thường là dạng Json). Phần render và logic sau đó hoàn toàn được thực thi ở browser người dùng (chaỵ bằng các JS Framework như: ReactJS, VueJS, AngularJS)
 
 ### II. Các module quan trọng trong Rails
-1. #### Models
-    1. Active Record Basics
-    2. Active Record Migrations
-    3. Active Record Validations
-    4. Active Record Callbacks
-    5. Active Record Associations
-    6. Active Record Query Interface
+1. #### Controllers
+    1. Rails Routing [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/routing.html)
+        - REST/RESTful là gì? Mối tương quan với CRUD trên một resource?
+            - Có rất nhiều kiến trúc giao tiếp giữa các máy tính với nhau SOAP (format XML), REST (format Json), GraphQL (format Json). Ở đây chúng ta sẽ nói về REST.
+            - REST là viết tắt của cụm từ Representational State Transfer. REST được sử dụng rất nhiều trong việc phát triển các ứng dụng Web Services sử dụng giao thức HTTP thông qua mạng internet. Các ứng dụng sử dụng kiến trúc REST này thì sẽ được gọi là ứng dụng phát triển theo kiểu RESTful.
+            - Mối tương quan
+                * Create (**C**RUD) - HTTP Post
+                * Read (C**R**UD) - HTTP Get
+                * Update (CR**U**D) - HTTP Put/Patch
+                * Delete (CRU**D**) - HTTP Delete
+        - Cấu trúc routing của Rails sử dụng cấu trúc REST.
+        - Mục đích của routing là từ URL của request ta sẽ đến và thực thị action tương ứng trong Controller. Trong Rails routing sẽ có một số action build-in `index`, `create`, `show`, `update`, `destroy`
+        - Mapping giữa HTTP Verb (Post, Get, Put ...) và URL tới controller action [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/routing.html#crud-verbs-and-actions)
+        - Sử dụng heplers để tạo Part và URL trong Rails [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/routing.html#path-and-url-helpers)
+        - Sử dụng `resource` và `resources`
+        - Sử dụng `namespace`. Lưu ý sự thay đổi của url, path, helpers và cấu trúc module
+        - Sử dụng Nested Resources.
+        - Sử dụng `member` and `collection` trong Resouces
+    2. Action Controller Overview [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/action_controller_overview.html)
+        - Lưu ý name convention trong controller.
+        - Cách tạo action trong controller và cách map action từ route. Ví dụ:
+        ```ruby
+        class ClientsController < ApplicationController
+            def new
+            end
+        end
+        # routes
+        resouce :clients do
+            collection do
+                get :new
+            end
+        end
+        ```
+        - Data từ HTTP request được gửi tới action thông qua Parameters
+            - Hash and Array parameters
+            - JSON parameters
+            - Routing paramters
+        - Để lọc và chỉ xử lý các parameter cần thiết ta sử dụng Strong Parameters.
+        - Sử dụng Session trong controller.
+        - Sử dụng Flash trong controller.
+        - Sử dụng cookies trong controller.
+        - Response và render ra các loại data format khác nhau.
+        - Sử dụng filter trong controller.
+        - Bảo mật: Cross-site request forgery.
+        - Streaming and File downloads.
 2. #### Views
-    1. Action View Overview
-    2. Layouts and Rendering in Rails
-    3. Action View Form Helpers
-3. #### Controllers
-    1. Action Controller Overview
-    2. Rails Routing
-4. #### Rails Internationalization (I18n)
-5. #### Rails Command Line
+    1. Action View Overview [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/action_view_overview.html)
+    2. Layouts and Rendering in Rails [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/layouts_and_rendering.html)
+    3. Action View Form Helpers [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/form_helpers.html)
+3. #### Models
+    1. Active Record Basics [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_basics.html)
+        - x
+    2. Active Record Migrations [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_migrations.html)
+    3. Active Record Validations [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_validations.html)
+    4. Active Record Callbacks [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_callbacks.html)
+    5. Active Record Associations [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/association_basics.html)
+    6. Active Record Query Interface [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_querying.html)
+
+
+4. #### Rails Internationalization (I18n) [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/i18n.html)
+    1. Làm cách nào để xử lý việc hiển thị đa ngôn ngữ trên các trang web?
+
+5. #### Rails Command Line [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/command_line.html)
 
 ### III. Bài tập
   1. Tạo Project đầu tiên theo [hướng dẫn](https://guides.rubyonrails.org/getting_started.html)
