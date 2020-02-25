@@ -110,10 +110,27 @@
     1. Active Record Basics [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_basics.html)
         - x
     2. Active Record Migrations [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_migrations.html)
-    3. Active Record Validations [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_validations.html)
-    4. Active Record Callbacks [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_callbacks.html)
-    5. Active Record Associations [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/association_basics.html)
-    6. Active Record Query Interface [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_querying.html)
+        - Rails Data Migrations là gì? Dùng để làm gì?
+        - Cách tạo migrations (`up`, `down`, `change`)
+        - Run migrations `db:migrate`
+        - Rollback migrations `db:rollback`
+        - Những lưu ý cần nhớ (best practice khi tạo và chạy migration)
+    3. Active Record Validations [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_validations.html) và Active Record Callbacks [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_callbacks.html)
+        - Sử dụng các validation tạo sẳn.
+        - Sử dụng kết hợp `if` và `unless`
+        - Tạo một validation tuỳ chỉnh.
+        - Sử dụng các Callback trong validation
+        - Thứ tự ưu tiên của các Callbacks
+    4. Active Record Associations [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/association_basics.html)
+        - Có các loại Relation Types nào?
+        - Cách khai báo và sử dụng?
+    5. Active Record Query Interface [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_querying.html)
+        - Đọc một record.
+        - Đọc nhiều record.
+        - Sử dụng điều kiện.
+        - Sử dụng SQL thuần.
+        - Sử dụng scope
+
 
 
 4. #### Rails Internationalization (I18n) [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/i18n.html)
@@ -123,3 +140,4 @@
 
 ### III. Bài tập
   1. Tạo Project đầu tiên theo [hướng dẫn](https://guides.rubyonrails.org/getting_started.html)
+  2. Ghi nhớ cấu trúc folder của một dự án Rails
