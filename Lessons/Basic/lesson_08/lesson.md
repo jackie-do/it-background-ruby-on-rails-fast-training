@@ -109,7 +109,7 @@
 3. #### Models
     1. Active Record Basics [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_basics.html)
         - Thay vì sử dụng SQL thuần để giao tiếp với Database (loaị RDS), trong thực tế ta thường sử dụng các ORM (Object Relational Mapping) để tương tác với Database. ORM là công cụ để ta dùng code, các object tương tác với database thay vì phải sử dụng SQL thuần. Ví dụ: 1 record trong 1 table được chuyển đổi thành 1 object Ruby với các method và thuộc tính tương ứng.
-        - Trong Ruby gem `activerecord` là gem nổi tiếng nhất và gần như là bắt buộc trong các dự án Rails. Tất nhiên bạn vẫn có thể sử dụng riêng gem này với các framework ruby khác.
+        - Trong Ruby gem `activerecord` là gem nổi tiếng nhất và gần như là bắt buộc trong các dự án Rails. Tất nhiên bạn vẫn có thể sử dụng riêng gem này với các framework ruby khác.
 
         - Một số lưu ý khi dùng `activerecord`
             - Mỗi table trong Database nên có một Model tương ứng.
