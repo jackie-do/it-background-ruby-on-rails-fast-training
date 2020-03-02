@@ -30,4 +30,24 @@
 ### II. Cấu hình cho Router
 
 ### III. Bài tập
-    -
+  1. Tạo Rails app với controller đầu tiên. [(Tham khảo)](./exercises/01)
+      - Tạo controller đầu tiên
+      ```bash
+      rails new first_controller
+      cd first_controller
+
+      # Tạo controller đầu tiên với name là Example và action là test
+      rails generate controller Example test
+
+      #
+      rails s
+      ```
+      - Kiểm tra lại một số file tự sinh ra và được cập nhật
+          - bạn vào lại route.rb (config/routes.rb) để xem sự thay đổi
+          - Kiểm tra controller đã tạo ở (app/controllers/example_controller.rb)
+          - Kiểm tra view tự động sinh ra ở (app/views/example/test.html.erb)
+      - Vào url tương ứng với action `test` của controller `Example`. Lưu ý kiểm tra log để thấy cách rails hoạt động.
+      > http://localhost:3000/example/test
+
+      - View `app/views/example/test.html.erb` bạn có thể cập nhập thoải mái bằng HTML thuần. Nếu bạn muốn bạn có thể dùng CSS inline.
+      - Làm sao để sử dụng CSS external ?
