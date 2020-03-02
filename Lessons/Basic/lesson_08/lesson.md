@@ -117,7 +117,7 @@
             - Schema Conventions: đổi với Foreign Keys và Primary Keys
             - Một số columns thường được sử dụng với mục đích riêng: `created_at`, `updated_at`, `lock_version`, `type`, `(association_name)_type`, `(table_name)_count`
     2. Active Record Migrations [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_migrations.html)
-        - Rails Data Migrations là gì? Dùng để làm gì?
+        - Rails Data Migrations là gì? Dùng để làm gì?
         - Cách tạo migrations (`up`, `down`, `change`)
         - Run migrations `db:migrate`
         - Rollback migrations `db:rollback`
