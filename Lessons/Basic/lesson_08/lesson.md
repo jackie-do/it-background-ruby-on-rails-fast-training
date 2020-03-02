@@ -122,6 +122,7 @@
         - Run migrations `db:migrate`
         - Rollback migrations `db:rollback`
         - Những lưu ý cần nhớ (best practice khi tạo và chạy migration)
+            - Một khi migration được tạo ra và push code lên, tuyệt đối không được sửa migration này. Muốn điều chỉnh lại database bắt buộc phải tạo migration mới cho việc điều chỉnh.
     3. Active Record Validations [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_validations.html) và Active Record Callbacks [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_callbacks.html)
         - Sử dụng các validation tạo sẳn.
         - Sử dụng kết hợp `if` và `unless`
