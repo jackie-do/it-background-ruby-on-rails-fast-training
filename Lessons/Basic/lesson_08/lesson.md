@@ -110,7 +110,7 @@
     1. Active Record Basics [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_basics.html)
         - x
     2. Active Record Migrations [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/active_record_migrations.html)
-        - Rails Data Migrations là gì? Dùng để làm gì?
+        - Rails Data Migrations là gì? Dùng để làm gì?
         - Cách tạo migrations (`up`, `down`, `change`)
         - Run migrations `db:migrate`
         - Rollback migrations `db:rollback`
