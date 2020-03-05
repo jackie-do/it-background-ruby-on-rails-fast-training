@@ -45,7 +45,7 @@
       end
       ```
   2. #### Resource Routing là gì?
-      -  Trong ví dụ ở trên các bạn có thể thấy ta sử dụng 2 methods `resources` và `resource`. Đây là methods rails support giúp ta nhanh chóng định nghĩa các route phổ biến cho một controller (`index`, `show`, `new`, `edit`, `create`, `update`, `destroy`) bằng 1 dòng code.
+      -  Trong ví dụ ở trên các bạn có thể thấy ta sử dụng 2 methods `resources` và `resource`. Đây là methods rails support giúp ta nhanh chóng định nghĩa các route phổ biến cho một controller (`index`, `show`, `new`, `edit`, `create`, `update`, `destroy`) bằng 1 dòng code.
       - Để kiểm tra bạn có thể dễ dàng khai báo routes bằng resource trong `routes.rb` và dùng `rake routes` (hoặc `rails routes`) để xem các routes khai báo.
       ```ruby
       Rails.application.routes.draw do
@@ -57,9 +57,11 @@
       end
       ```
 
-      1. **CRUD, Verbs and Actions**
+      **1. CRUD, Verbs and Actions**
       - Khi bạn check `rake routes` bạn sẽ thấy sẽ có việc mapping kết hợp **HTTP Verbs** (GET, POST, PUT, PATCH, DELETE) và **URL** để dẫn đến một **action** cụ thể của một **controller** nào đó. Ví dụ:
-        > `resources :photos`
+        ```ruby
+          resources :photos
+        ```
 
         | **HTTP Verb** | **Path**         | **Controller#Action** | **Used for**                        |
         |---------------|------------------|-----------------------|-------------------------------------|
@@ -73,7 +75,7 @@
 
 
 
-      2. **Sử dụng Path and URL helpers**
+      **2. Sử dụng Path and URL helpers**
       - Khi bạn sử dụng `resources` để tạo routes, thì rails cũng sẽ tự động sinh ra một vài helper tương ứng có bạn sử dụng. Trong trường hợp resources photos phía trên. ta sẽ có một số heplers:
           - `photos_path` trả về */photos*
           - `new_photo_path` trả về */photos/new*
@@ -82,9 +84,9 @@
           - `photos_url`, `new_photo_url` ...
           - ...
 
-      3. Singular Resources
+      **3. Singular Resources**
 
-      4. Controller Namespaces và Routing
+      **4. Controller Namespaces và Routing**
           - Thay vì để toàn bộ các controllers của mình trong một thư mục `app/controllers`. Ta có thể tạo các thư mục con trong thư mục `controllers` và chia các controllers của chúng ta theo các cụm tương ứng, có chức năng liên quan tới nhau. Việc phân chia cấu trúc như vậy cần có một sự điều chỉnh ở `routes.rb` người ta gọi đó là **`namespace`**. Ví dụ: chúng ta bỏ 2 controlers articles và comment trong thư mục admin. Ta phải có sự khai báo phù hợp trong `routes.rb`. Việc khai báo này sẽ ảnh hưởng route được tạo ra và nơi để chỉ định action của controller.
             ```ruby
             # app/controllers/admin/articles_controller.rb
@@ -129,9 +131,9 @@
             end
             ```
 
-      5. Nested Resources
+      **5. Nested Resources**
 
-      6. Thêm các actions tuỳ chỉnh
+      **6. Thêm các actions tuỳ chỉnh**
 
   3. #### Non-Resource Routing là gì?
 
@@ -155,5 +157,5 @@
       - Vào url tương ứng với action `test` của controller `Example`. Lưu ý kiểm tra log để thấy cách rails hoạt động.
       > http://localhost:3000/example/test
 
-      - View `app/views/example/test.html.erb` bạn có thể cập nhập thoải mái bằng HTML thuần. Nếu bạn muốn bạn có thể dùng CSS inline.
+      - View `app/views/example/test.html.erb` bạn có thể cập nhật thoải mái bằng HTML thuần. Nếu bạn muốn bạn có thể dùng CSS inline.
       - Làm sao để sử dụng CSS external ?
