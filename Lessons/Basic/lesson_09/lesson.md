@@ -266,3 +266,66 @@
         # config/routes.rb
         get "home/applepie", to: "home#ping"
         ```
+  3. Sử dụng Bound Parameters trong route [(Tham khảo)](./exercises/03)
+      - Tạo project
+        ```bash
+        rails new blog
+
+        cd blog
+
+        # Sử dụng lệnh scaffold để build 1 combo gồm Controller/View/Model
+        rails generate scaffold post subject content published_on:date
+        rails db:migrate
+
+        # Kiểm tra các routes hiện có
+        rails routes
+        ```
+      - Tạo data ban đầu ở `db/seeds.rb`, sau đó chạy lệnh tạo data `rails db:seed`, sau đó start server `rails s`
+        ```ruby
+        # db/seeds.rb
+        Post.create(subject: 'A test', published_on: '01.10.2011')
+        Post.create(subject: 'Another test', published_on: '01.10.2011')
+        Post.create(subject: 'And yet one more test', published_on: '02.10.2011')
+        Post.create(subject: 'Last test', published_on: '01.11.2011')
+        Post.create(subject: 'Very final test', published_on: '01.11.2012')
+        ```
+      - Vào lại trang index của PostController để kiểm tra. URL là .......
+      - Kiểm tra lại `config/routes.rb` (lúc này bạn sẽ thấy method `resources`). Cập nhật để thêm 1 route mới (Bound Parameters)
+        ```ruby
+        Rails.application.routes.draw do
+          resources :posts
+
+          get ':year(/:month(/:day))', to: 'posts#index'
+        end
+        ```
+      - Cập nhật action `index` để làm việc với route mới
+        ```ruby
+        # app/controllers/posts_controller.rb
+        def index
+          # Check if the URL requests a date.
+          if Date.valid_date?(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+            start_date = Date.parse("#{params[:day]}.#{params[:month]}.#{params[:year]}")
+            end_date = start_date
+          # Check if the URL requests a month
+          elsif Date.valid_date?(params[:year].to_i, params[:month].to_i, 1)
+            start_date = Date.parse("1.#{params[:month]}.#{params[:year]}")
+            end_date = start_date.end_of_month
+          # Check if the URL requests a year
+          elsif params[:year] && Date.valid_date?(params[:year].to_i, 1, 1)
+            start_date = Date.parse("1.1.#{params[:year]}")
+            end_date = start_date.end_of_year
+          end
+
+          if start_date && end_date
+            @posts = Post.where(published_on: start_date..end_date)
+          else
+            @posts = Post.all
+          end
+        end
+        ```
+      - Vào một số URL để kiểm tra kết quả:
+          - http://localhost:3000/2011/10/01  (lưu ý kiểm tra giá trị params)
+          - http://localhost:3000/2011/10  (lưu ý kiểm tra giá trị params)
+          - http://localhost:3000/2011  (lưu ý kiểm tra giá trị params)
+      - Bài tập: Comment route mới, thay vì dùng bound parameters thì hãy dùng query string để lọc ngày tháng tương tự ?
+      - Bài tập: Bạn thử tạo 1 route khác, dùng lại action `index` bằng Dynamic Segmens.
