@@ -229,3 +229,40 @@
 
       - View `app/views/example/test.html.erb` bạn có thể cập nhật thoải mái bằng HTML thuần. Nếu bạn muốn bạn có thể dùng CSS inline.
       - Làm sao để sử dụng CSS external ?
+  2. Tạo Rails app để làm quen với một số option cơ bản của Router [(Tham khảo)](./exercises/02)
+      - Tạo project cùng với controller và 3 actions
+        ```bash
+        # Tạo project tên "shop"
+        rails new shop
+        cd shop
+        rails db:migrate
+
+        # check available routes (bỏ qua các route của active_storage nếu có)
+        rails routes
+
+        # Tạo Controller đầu tiên cùng với 3 actions
+        rails generate controller Home index ping pong
+
+        # Kiểm tra lại routes, có thể kiểm tra bằng cách loc keyword "rails routes | grep home"
+        rails routes
+
+        rails s
+
+        ```
+      - Lúc này ta có 3 trang tương ứng với actions của HomeController. Bạn hãy vào từng URL để kiểm tra
+      - Kiểm tra `config/routes.rb` ta sẽ thấy 3 routes tương ứng.
+      - Đổi tên 1 route với option `as`. Kiểm tra kết quả bằng `rails routes` và sử dụng URL mới
+        ```ruby
+        # config/routes.rb
+        get "home/pong", as: 'different_name'
+        ```
+      - Đổi tên 1 route với option `as`. Kiểm tra kết quả bằng `rails routes` và kiểm tra sự thay đổi của các helpers đi kèm trong rails console. Ví dụ: `app.different_name_path`
+        ```ruby
+        # config/routes.rb
+        get "home/pong", as: 'different_name'
+        ```
+      - Thêm 1 route mới dùng lại action đã có option `to`.
+        ```ruby
+        # config/routes.rb
+        get "home/applepie", to: "home#ping"
+        ```
