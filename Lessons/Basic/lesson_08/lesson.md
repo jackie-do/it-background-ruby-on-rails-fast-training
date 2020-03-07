@@ -145,6 +145,7 @@
     1. Làm cách nào để xử lý việc hiển thị đa ngôn ngữ trên các trang web?
 
 5. #### Rails Command Line [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/command_line.html)
+    1. Các câu lệnh phổ biến làm việc với Rails
 
 ### III. Bài tập
   1. Tạo Project đầu tiên theo [hướng dẫn](https://guides.rubyonrails.org/v5.2/getting_started.html)

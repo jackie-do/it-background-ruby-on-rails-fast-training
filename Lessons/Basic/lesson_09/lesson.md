@@ -7,7 +7,7 @@
 
 -----
 
-### I. Cấu trúc của Controllers
+### I. Cấu trúc của Controllers [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/action_controller_overview.html)
   1. #### Controller có tác dụng gì?
       - Khi một request của người dùng đến Rail app, thì nó sẽ được Router điều hướng đến một `controller` và được xử lý bởi một `action` phù hợp. Trong action đó thì dựa trên thông tin trong request mà ta sẽ có logic và tạo ra output trả về phù hợp.
   2. #### Cấu trúc Controller
@@ -27,7 +27,7 @@
       - **`Cookies`**
 
 
-### II. Cấu hình cho Rails Router
+### II. Cấu hình cho Rails Router [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/routing.html)
   1. #### Router có tác dụng gì?
       - Trong Rails app, router có 2 tác dụng chính
           - Kết nối URLs tới code (cự thể ở đây là 1 action của controller).
@@ -87,55 +87,125 @@
       **3. Singular Resources**
 
       **4. Controller Namespaces và Routing**
-          - Thay vì để toàn bộ các controllers của mình trong một thư mục `app/controllers`. Ta có thể tạo các thư mục con trong thư mục `controllers` và chia các controllers của chúng ta theo các cụm tương ứng, có chức năng liên quan tới nhau. Việc phân chia cấu trúc như vậy cần có một sự điều chỉnh ở `routes.rb` người ta gọi đó là **`namespace`**. Ví dụ: chúng ta bỏ 2 controlers articles và comment trong thư mục admin. Ta phải có sự khai báo phù hợp trong `routes.rb`. Việc khai báo này sẽ ảnh hưởng route được tạo ra và nơi để chỉ định action của controller.
-            ```ruby
-            # app/controllers/admin/articles_controller.rb
-            module Admin
-              class ArticlesController < ApplicationController
-                def index
-                end
 
-                def create
-                end
-                # other actions ...
-              end
+      - Thay vì để toàn bộ các controllers của mình trong một thư mục `app/controllers`. Ta có thể tạo các thư mục con trong thư mục `controllers` và chia các controllers của chúng ta theo các cụm tương ứng, có chức năng liên quan tới nhau. Việc phân chia cấu trúc như vậy cần có một sự điều chỉnh ở `routes.rb` người ta gọi đó là **`namespace`**. Ví dụ: chúng ta bỏ 2 controlers articles và comment trong thư mục admin. Ta phải có sự khai báo phù hợp trong `routes.rb`. Việc khai báo này sẽ ảnh hưởng route được tạo ra và nơi để chỉ định action của controller.
+
+        ```ruby
+        # app/controllers/admin/articles_controller.rb
+        module Admin
+          class ArticlesController < ApplicationController
+            def index
             end
 
-            # app/controllers/admin/comments_controller.rb
-            module Admin
-              class CommentsController < ApplicationController
-                def index
-                end
+            def create
+            end
+            # other actions ...
+          end
+        end
 
-                def create
-                end
-                # other actions ...
-              end
+        # app/controllers/admin/comments_controller.rb
+        module Admin
+          class CommentsController < ApplicationController
+            def index
             end
 
-
-            # config/routes.rb
-            namespace :admin do
-              resources :articles, :comments
+            def create
             end
-            ```
+            # other actions ...
+          end
+        end
 
-          - Lưu ý, option `module` sẽ ảnh hưởng nơi lấy controller và option `scope` sẽ ảnh hưởng path của route. Chỉnh sửa `routes.rb` để xem lại. Kiểm tra lại bằng `rake routes`
-            ```ruby
-            scope '/admin' do
-              resources :articles
-            end
 
-            scope module: 'admin' do
-              resources :comments
-            end
-            ```
+        # config/routes.rb
+        namespace :admin do
+          resources :articles, :comments
+        end
+        ```
+
+      - Lưu ý, option `module` sẽ ảnh hưởng nơi lấy controller và option `scope` sẽ ảnh hưởng path của route. Chỉnh sửa `routes.rb` để xem lại. Kiểm tra lại bằng `rake routes`
+        ```ruby
+        scope '/admin' do
+          resources :articles
+        end
+
+        scope module: 'admin' do
+          resources :comments
+        end
+        ```
 
       **5. Nested Resources**
 
       **6. Thêm các actions tuỳ chỉnh**
 
   3. #### Non-Resource Routing là gì?
+      **1. Bound Parameters**
+      - Bạn có thể thêm optional parameters cho 1 route
+        ```ruby
+        get 'photos(/:id)', to: :display
+
+        # Example URL: /photos hoặc /photos/101
+        ```
+        > Bất cứ URL nào map /photos/ hoặc /photos/101 đều sẽ được xử lý ở action display của PhotosController
+
+      **2. Dynamic Segments**
+      - Bạn có thể truyền các giá trị động (Dynamic Segment, bắt đầu bằng dấu `:`) bằng URL miễn là nó nằm đúng vị trí như bạn thiết kế.
+        ```ruby
+        get 'photos/:id/:user_id', to: 'photos#show'
+
+        # Example URL: photos/101/10
+        ```
+        > Trong ví dụ trên bất cứ gía trị gì nằm ở vị trí của `:id` và `:user_id` sẽ được lấy bằng `params[:id]` và `params[:user_id]` ở PhotosController.
+
+      **3. Static Segments**
+      - Thiết kế bằng URL bằng cách thêm chữ thể tăng ngữ nghĩ miễn là nó không có dấu `:` đứng trước.
+        ```ruby
+        get 'photos/:id/with_user/:user_id', to: 'photos#show'
+
+        # Example URL: photos/101/with_user/10
+        ```
+        > Trong ví dụ trên bất `with_user` được xem làm static segments
+
+      **4. The Query String**
+      - Đây là cách phổ biến nhất để truyền giá trị bằng URL. Tất cả các query string sẽ được tính sau dấu `?` theo cấu trúc key `=` value và phân cách nhau bằng dấu `=`
+        ```ruby
+        get 'photos/:id', to: 'photos#show'
+
+        # Example URL: /photos/101?user_id=10 hoặc /photos/101?user_id=10&second_user_id=11
+        ```
+        > Với ví dụ trên ngoài `params[:id]` ta còn có params[:user_id] và params[:second_user_id] được truyền trong Query String.
+      - Làm sao để truyền một mảng trong query string? Làm sao để truyền 1 hash (object lồng)? Độ dài giới hạn của 1 URL là bao nhiêu?
+
+      **5. Defining Defaults**
+      - Định nghĩa đuôi file trả về của 1 action (phổ biến nhất là `html` và `json`). Giá trị này sẽ giúp chọn loại format và logic xử lý riêng (nếu có)
+      ```ruby
+      get 'photos/:id', to: 'photos#show', defaults: { format: 'jpg' }
+
+      # hoặc
+      defaults format: :json do
+        resources :photos
+      end
+      ```
+
+      **6. Naming Routes**
+      - Thay ví để Rails tự tạo ra URL và các helpers thì bạn có thể điều chỉnh bằng option `as`
+        ```ruby
+          get 'exit', to: 'sessions#destroy', as: :logout
+        ```
+      **7. HTTP Verb Constraints***
+      - Có thể sử dụng nhiều HTTP method cho 1 route
+        ```ruby
+        match 'photos', to: 'photos#show', via: [:get, :post]
+
+        # hoặc
+        match 'photos', to: 'photos#show', via: :all
+        ```
+      **8. Segment Constraints**
+      - Bạn có thể định dạng format của các dynamic segnment bằng cú pháp RegEx hoặc code ruby ở với option `constraints`
+        ```ruby
+        get 'photos/:id', to: 'photos#show', constraints: { id: /[A-Z]\d{5}/ }
+        ```
+        > Với ví dụ trên chỉ có url /photos/A12345 sẽ vào action show còn url photos/893 thì không.
+
 
 ### III. Bài tập
   1. Tạo Rails app với controller đầu tiên. [(Tham khảo)](./exercises/01)
