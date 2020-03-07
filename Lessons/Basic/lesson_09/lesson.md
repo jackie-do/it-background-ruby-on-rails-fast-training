@@ -148,7 +148,7 @@
         > Bất cứ URL nào map /photos/ hoặc /photos/101 đều sẽ được xử lý ở action display của PhotosController
 
       **2. Dynamic Segments**
-      - Bạn có thể truyền các giá trị động (Dynamic Segment, bắt đầu bằng dấu `:`) bằng URL miễn là nó nằm đúng vị trí như bạn thiết kế.
+      - Bạn có thể truyền các giá trị động - Dynamic Segment, bắt đầu bằng dấu `:` trong URL miễn là nó nằm đúng vị trí như bạn thiết kế.
         ```ruby
         get 'photos/:id/:user_id', to: 'photos#show'
 
@@ -157,7 +157,7 @@
         > Trong ví dụ trên bất cứ gía trị gì nằm ở vị trí của `:id` và `:user_id` sẽ được lấy bằng `params[:id]` và `params[:user_id]` ở PhotosController.
 
       **3. Static Segments**
-      - Thiết kế bằng URL bằng cách thêm chữ thể tăng ngữ nghĩ miễn là nó không có dấu `:` đứng trước.
+      - Thiết kế bằng URL bằng cách thêm chữ thể tăng ngữ nghĩa miễn là nó không có dấu `:` đứng trước.
         ```ruby
         get 'photos/:id/with_user/:user_id', to: 'photos#show'
 
