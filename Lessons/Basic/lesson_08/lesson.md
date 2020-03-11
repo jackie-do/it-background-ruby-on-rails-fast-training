@@ -140,7 +140,6 @@
         - Sử dụng scope
 
 
-
 4. #### Rails Internationalization (I18n) [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/i18n.html)
     1. Làm cách nào để xử lý việc hiển thị đa ngôn ngữ trên các trang web?
 
