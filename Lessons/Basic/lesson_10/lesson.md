@@ -24,8 +24,9 @@
 ### II. Sử dụng Layout và Rendering trong Rails [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/layouts_and_rendering.html)
 
 ### III. Sử dụng các Form Helpers [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/form_helpers.html)
+### IV. Sử dụng I18n (Internationalization) cho việc hiển thị đa ngôn ngữ
 
 
 
-### IV. Bài tập
+### V. Bài tập
   1. xx
