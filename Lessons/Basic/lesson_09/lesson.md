@@ -327,5 +327,5 @@
           - http://localhost:3000/2011/10/01  (lưu ý kiểm tra giá trị params)
           - http://localhost:3000/2011/10  (lưu ý kiểm tra giá trị params)
           - http://localhost:3000/2011  (lưu ý kiểm tra giá trị params)
-      - Bài tập: Comment route mới, thay vì dùng bound parameters thì hãy dùng query string để lọc ngày tháng tương tự ?
+      - Bài tập: Comment route mới, thay vì dùng bound parameters thì hãy dùng query string để lọc ngày tháng tương tự ? (tái sử dụng các routes được tạo ra từ resources)
       - Bài tập: Bạn thử tạo 1 route khác, dùng lại action `index` bằng Dynamic Segmens.
