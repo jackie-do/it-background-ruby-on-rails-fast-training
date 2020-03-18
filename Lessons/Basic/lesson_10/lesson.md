@@ -2,7 +2,7 @@
 
 ## Nội dung cần học
  - Cấu trúc của Action Views
- - Sử dụng Layout và Rendering trong Rails
+ - Sử dụng Layout và Rendering trong Rails
  - Sử dụng các Form Helpers
  - Bài tập
 
@@ -10,7 +10,7 @@
 
 ### I. Cấu trúc của Action Views [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/action_view_overview.html)
   1. #### Action Views  có tác dụng gì?
-      - Với mỗi `controller` thì luôn có một `view` folder tương ứng ở `app/views` chứa các templates để tạo view cho các action tương ứng của controller đó. Tên file của view phải trùng với tên action trong controller.
+      - Với mỗi `controller` thì luôn có một `view` folder tương ứng ở `app/views` chứa các templates để tạo view cho các action tương ứng của controller đó. Tên file của view phải trùng với tên action trong controller.
       - Ví dụ:
         ```bash
         # Dùng scaffold để tạo MVC cho article
@@ -85,7 +85,7 @@
   6. #### Các loại Helpers hữu ích [(Tham khảo)](https://guides.rubyonrails.org/v5.2/action_view_overview.html#overview-of-helpers-provided-by-action-view)
       - AssetTagHelper (quan trọng)
       - AtomFeedHelper
-      - BenchmarkHelper
+      - BenchmarkHelper
       - CacheHelper
       - CaptureHelper
       - DateHelper
@@ -98,7 +98,7 @@
       - SanitizeHelper
       - CsrfHelper
 
-### II. Sử dụng Layout và Rendering trong Rails [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/layouts_and_rendering.html)
+### II. Sử dụng Layout và Rendering trong Rails [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/layouts_and_rendering.html)
   - Đối với 1 controller có 3 cách để tạo một HTTP response trả về cho một HTTP request:
     - Gọi `render` để tạo một response đầy đủ (trả về HTML, JSON ...) và gửi ngược về browser.
     - Gọi `redirect_to` để gửi HTTP redirect status code về browser.
