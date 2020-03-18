@@ -509,3 +509,74 @@
       - Vào lại http://localhost:3000/home/show_cookies để xem thay đổi (và vào browser check giá trị trong cookies)
       - Vào http://localhost:3000/home/delete_cookies để xoá giá trị ở cookies.
       - Vào lại http://localhost:3000/home/show_cookies để xem thay đổi (và vào browser check giá trị trong cookies)
+      - Phải hiểu được cookie lưu data ở đâu? Làm sao lấy data của cookie trên server? Các options khi set một cookies trên server?
+
+  5. Làm quen với session [(Tham khảo)](./exercises/05)
+      - Tạo project mới, track lại 3 request trước đó đã truy cập
+        ```bash
+        rails new breadcrumbs
+        cd breadcrumbs
+
+        rails db:migrate
+
+        # Tạo ra home controller và 3 actions để làm việc với sesion
+        rails generate controller Home ping pong index
+        ```
+      - Cập nhật home controller
+        ```ruby
+        # app/controllers/home_controller.rb
+        class HomeController < ApplicationController
+          before_action :set_breadcrumbs
+
+          def ping
+          end
+
+          def pong
+          end
+
+          def index
+          end
+
+          private
+
+          def set_breadcrumbs
+            if session[:breadcrumbs]
+              @breadcrumbs = session[:breadcrumbs]
+            else
+              @breadcrumbs = Array.new
+            end
+
+            @breadcrumbs.push(request.url)
+            if @breadcrumbs.count > 4
+              # shift removes the first element
+              @breadcrumbs.shift
+            end
+
+            session[:breadcrumbs] = @breadcrumbs end
+          end
+        ```
+
+      - Cập nhật view layout `app/views/layouts/application.html.erb`
+        ```html
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Breadcrumbs</title>
+            <%= csrf_meta_tags %>
+            <%= stylesheet_link_tag
+            turbolinks-track': 'reload' %>
+            <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+          </head>
+          <body>
+            <% if @breadcrumbs && @breadcrumbs.any? %>
+              <h3>Surf History</h3>
+              <ul>
+                <% @breadcrumbs[0..2].each do |breadcrumb| %>
+                  <li><%= link_to breadcrumb, breadcrumb %></li>
+                <% end %>
+              </ul>
+            <% end %>
+            <%= yield %>
+          </body>
+        </html>
+        ```
