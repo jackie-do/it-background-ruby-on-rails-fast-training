@@ -563,8 +563,7 @@
           <head>
             <title>Breadcrumbs</title>
             <%= csrf_meta_tags %>
-            <%= stylesheet_link_tag
-            turbolinks-track': 'reload' %>
+            <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
             <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
           </head>
           <body>
