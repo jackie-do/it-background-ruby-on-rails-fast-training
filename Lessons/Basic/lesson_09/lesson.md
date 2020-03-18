@@ -456,3 +456,56 @@
           - http://localhost:3000/2011  (lưu ý kiểm tra giá trị params)
       - Bài tập: Comment route mới, thay vì dùng bound parameters thì hãy dùng query string để lọc ngày tháng tương tự ? (tái sử dụng các routes được tạo ra từ resources)
       - Bài tập: Bạn thử tạo 1 route khác, dùng lại action `index` bằng Dynamic Segmens.
+
+  4. Làm quen với Cookies [(Tham khảo)](./exercises/04)
+      - Tạo project
+        ```bash
+        rails new cookie_jar
+        cd cookie_jar
+
+        rails db:migrate
+
+        # Tạo ra home controller và 3 actions để làm việc với cookies
+        rails generate controller home set_cookies show_cookies delete_cookies
+
+        # Kiểm tra các routes hiện có
+        rails routes
+        ```
+      - Cập nhật home controller
+        ```ruby
+        # app/controllers/home_controller.rb
+        class HomeController < ApplicationController
+          def set_cookies
+            cookies[:user_name]       = "Smith"
+            cookies[:customer_number] = "1234567890"
+          end
+
+          def show_cookies
+            @user_name = cookies[:user_name]
+            @customer_number = cookies[:customer_number]
+          end
+
+          def delete_cookies
+            cookies.delete :user_name
+            cookies.delete :customer_number
+          end
+        end
+        ```
+      - Cập nhật view cho `show_cookies` action ở app/views/home/show_cookies.html.erb
+        ```HTML
+        <table>
+          <tr>
+            <td>User Name:</td>
+            <td><%= @user_name %></td>
+          </tr>
+          <tr>
+            <td>Customer Number:</td>
+            <td><%= @customer_number %></td>
+          </tr>
+        </table>
+        ```
+      - Start server bằng `rails s`. Vào kiểm tra http://localhost:3000/home/show_cookies lúc này chưa có gì. Bạn có thể chi tiết trong browser để kiểm tra cookie có tồn tại hay không (google để biết cách xem cookie trong browser)
+      - Vào http://localhost:3000/home/set_cookies để lưu giá trị vào cookies.
+      - Vào lại http://localhost:3000/home/show_cookies để xem thay đổi (và vào browser check giá trị trong cookies)
+      - Vào http://localhost:3000/home/delete_cookies để xoá giá trị ở cookies.
+      - Vào lại http://localhost:3000/home/show_cookies để xem thay đổi (và vào browser check giá trị trong cookies)
