@@ -25,9 +25,9 @@
         - Session được sử dụng để lưu một lượng nhỏ data và thống nhất giữa các requests cho mỗi user.
         - Data của Session thường được lưu trữ trên server. Có thể được lưu trong 4 dạng:
           - Cookie Session - `ActionDispatch::Session::CookieStore` lưu ở client (được mã hoá trong cookie)
-          - Cache Session - `ActionDispatch::Session::CacheStore ` lưu ở Rails Cache
+          - Cache Session - `ActionDispatch::Session::CacheStore ` lưu ở Rails Cache
           - ActiveRecord Session - `ActionDispatch::Session::ActiveRecordStore` lưu ở Database (cần gem `activerecord-session_store`)
-          - Memcached Session - `ActionDispatch::Session::MemCacheStore` tương tự như Cache Session, nhưng cách này không linh hoạt bằng (hết thời)
+          - Memcached Session - `ActionDispatch::Session::MemCacheStore` tương tự như Cache Session, nhưng cách này không linh hoạt bằng (hết thời)
         - **Cookie Session** là default session trong Rails, thông tin session được mã hoá dựa trên secret_key_base ở `config/credentials.yml.enc` và lưu trữ ở cookie của browser.
         - Có thể thao tác với thông tin của session bằng instance method `session`. Thao tác như một biến bình thường.
           ```ruby
@@ -293,7 +293,7 @@
         > Trong ví dụ trên bất `with_user` được xem làm static segments
 
       **4. The Query String**
-      - Đây là cách phổ biến nhất để truyền giá trị bằng URL. Tất cả các query string sẽ được tính sau dấu `?` theo cấu trúc key `=` value và phân cách nhau bằng dấu `=`
+      - Đây là cách phổ biến nhất để truyền giá trị bằng URL. Tất cả các query string sẽ được tính sau dấu `?` theo cấu trúc key `=` value và phân cách nhau bằng dấu `=`. Chúng ra không cần khai báo route mới mà có thể sử dụng route cũ với cú pháp của query string.
         ```ruby
         get 'photos/:id', to: 'photos#show'
 
@@ -303,7 +303,7 @@
       - Làm sao để truyền một mảng trong query string? Làm sao để truyền 1 hash (object lồng)? Độ dài giới hạn của 1 URL là bao nhiêu?
 
       **5. Defining Defaults**
-      - Định nghĩa đuôi file trả về của 1 action (phổ biến nhất là `html` và `json`). Giá trị này sẽ giúp chọn loại format và logic xử lý riêng (nếu có)
+      - Định nghĩa đuôi file trả về của 1 action (phổ biến nhất là `html` và `json`). Giá trị này sẽ giúp chọn loại format và logic xử lý riêng (nếu có)
       ```ruby
       get 'photos/:id', to: 'photos#show', defaults: { format: 'jpg' }
 
@@ -417,7 +417,7 @@
         Post.create(subject: 'Very final test', published_on: '01.11.2012')
         ```
       - Vào lại trang index của PostController để kiểm tra. URL là .......
-      - Kiểm tra lại `config/routes.rb` (lúc này bạn sẽ thấy method `resources`). Cập nhật để thêm 1 route mới (Bound Parameters)
+      - Kiểm tra lại `config/routes.rb` (lúc này bạn sẽ thấy method `resources`). Cập nhật để thêm 1 route mới (Bound Parameters)
         ```ruby
         Rails.application.routes.draw do
           resources :posts
