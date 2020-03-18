@@ -215,7 +215,85 @@
     > Cache-Control: no-cache <br/>
 
 ### III. Sử dụng các Form Helpers [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/form_helpers.html)
+  1. Basic Form
+  ```HTML
+  <%= form_tag do %>
+    Form contents
+  <% end %>
+  ```
+
+  ```html
+  <%= form_tag("/search", method: "get") do %>
+    <%= label_tag(:q, "Search for:") %>
+    <%= text_field_tag(:q) %>
+    <%= submit_tag("Search") %>
+  <% end %>
+  ```
+
+  ```html
+  <%= form_tag({controller: "people", action: "search"}, method: "get", class: "nifty_form") do %>
+    <%= label_tag(:q, "Search for:") %>
+    <%= text_field_tag(:q) %>
+    <%= submit_tag("Search") %>
+  <% end %>
+  ```
+
+
+  2. Form Elements
+      - Checkboxes
+      - Radio Buttons
+      - Text area
+      - Password field
+      - Hidden field
+      - Search field
+      - Phone field
+      - Date field
+      - url field
+      - email field
+      - color_field
+      - numer_field
+      - range_field
+      ```html
+      <%= check_box_tag(:pet_dog) %>
+      <%= label_tag(:pet_dog, "I own a dog") %>
+      <%= check_box_tag(:pet_cat) %>
+      <%= label_tag(:pet_cat, "I own a cat") %>
+
+      <%= radio_button_tag(:age, "child") %>
+      <%= label_tag(:age_child, "I am younger than 21") %>
+      <%= radio_button_tag(:age, "adult") %>
+      <%= label_tag(:age_adult, "I'm over 21") %>
+
+      <%= text_area_tag(:message, "Hi, nice site", size: "24x6") %>
+      <%= password_field_tag(:password) %>
+      <%= hidden_field_tag(:parent_id, "5") %>
+      <%= search_field(:user, :name) %>
+      <%= telephone_field(:user, :phone) %>
+      <%= date_field(:user, :born_on) %>
+      <%= datetime_local_field(:user, :graduation_day) %>
+      <%= month_field(:user, :birthday_month) %>
+      <%= week_field(:user, :birthday_week) %>
+      <%= url_field(:user, :homepage) %>
+      <%= email_field(:user, :address) %>
+      <%= color_field(:user, :favorite_color) %>
+      <%= time_field(:task, :started_at) %>
+      <%= number_field(:product, :price, in: 1.0..20.0, step: 0.5) %>
+      <%= range_field(:product, :discount, in: 1..100) %>
+      ```
+
+  3. Model Object
+    - Mode Object Helpers
+    - Binding a Form to an Object
+    - Relying on Record Identification
+    - Sử dụng PATCH, PUT, DELETE trong một form
+
+  4. Date and Time Form Helpers
+  5. Uploading Files
+  6. Parameter Naming Conventions
+
 ### IV. Sử dụng I18n (Internationalization) cho việc hiển thị đa ngôn ngữ
+  1. Localized Views
+  2. I18n
 
 
 
