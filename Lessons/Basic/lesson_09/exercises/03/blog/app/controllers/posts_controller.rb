@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    byebug
     # Check if the URL requests a date.
     if Date.valid_date?(params[:year].to_i, params[:month].to_i, params[:day].to_i)
       start_date = Date.parse("#{params[:day]}.#{params[:month]}.#{params[:year]}")

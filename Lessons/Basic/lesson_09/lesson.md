@@ -13,7 +13,7 @@
   2. #### Cấu trúc Controller
       - **`Naming Convention`**  Khi một controller được tạo mới, ta sẽ đặt tên class controller thế nào và đặt tên file của controller đó thế nào?
       - **`Action`** trong controller là gì? Về cơ bản một controller chỉ là một Ruby class được kế thừa từ class `ApplicationController`. Trong một class có rất nhiều public methods, nếu một public method được cấu hình (trong file `route.rb`) để Router trỏ đến, thì method này được xem là action.
-      - **`Filters`** "before", "after", "around"
+      - **`Filters`** "before", "after", "around" đây là các trigger sẽ gọi method chỉ định khi có một sự kiện phù hợp xảy ra.
       - **`Parameters`**
         - Làm thế nào để client gửi thông tin lên Rails app?
         - Các thông tin này được chứa ở đâu trong 1 HTTP request?
@@ -22,9 +22,93 @@
       - **`Strong Parameters`** được sử dụng để lọc các parameters không được cho phép, chỉ xử lý một số paramaters nhất định.
       - **`Request and Response`** mọi controllers có 2 methods `request` and `response` chứa thông tin request từ client và response trả về tại thời điểm đó. [(Tham khảo)](https://guides.rubyonrails.org/v5.2/action_controller_overview.html#the-request-and-response-objects)
       - **`Sessions`**
-        - Có bao nhiêu loại Session trong Rails?
-        - `Flash` là gì?
+        - Session được sử dụng để lưu một lượng nhỏ data và thống nhất giữa các requests cho mỗi user.
+        - Data của Session thường được lưu trữ trên server. Có thể được lưu trong 4 dạng:
+          - Cookie Session - `ActionDispatch::Session::CookieStore` lưu ở client (được mã hoá trong cookie)
+          - Cache Session - `ActionDispatch::Session::CacheStore ` lưu ở Rails Cache
+          - ActiveRecord Session - `ActionDispatch::Session::ActiveRecordStore` lưu ở Database (cần gem `activerecord-session_store`)
+          - Memcached Session - `ActionDispatch::Session::MemCacheStore` tương tự như Cache Session, nhưng cách này không linh hoạt bằng (hết thời)
+        - **Cookie Session** là default session trong Rails, thông tin session được mã hoá dựa trên secret_key_base ở `config/credentials.yml.enc` và lưu trữ ở cookie của browser.
+        - Có thể thao tác với thông tin của session bằng instance method `session`. Thao tác như một biến bình thường.
+          ```ruby
+          # Đọc data từ session
+          class ApplicationController < ActionController::Base
+            private
+            # Finds the User with the ID stored in the session with the key
+            # :current_user_id This is a common way to handle user login in
+            # a Rails application; logging in sets the session value and
+            # logging out removes it.
+            def current_user
+              @_current_user ||= session[:current_user_id] &&
+                User.find_by(id: session[:current_user_id])
+            end
+          end
+          ```
+
+          ```ruby
+          # Lưu data vào session
+          class LoginsController < ApplicationController
+            # "Create" a login, aka "log the user in"
+            def create
+              if user = User.authenticate(params[:username], params[:password])
+                # Save the user ID in the session so it can be used in
+                # subsequent requests
+                session[:current_user_id] = user.id
+                redirect_to root_url
+              end
+            end
+          end
+          ```
+
+          ```ruby
+          # Xoá data từ session
+          class LoginsController < ApplicationController
+            # "Delete" a login, aka "log the user out"
+            def destroy
+              # Remove the user id from the session
+              @_current_user = session[:current_user_id] = nil
+              redirect_to root_url
+            end
+          end
+          ```
+        - `Flash` là gì? Là một phần data đặc biệt nằm trong session, sẽ được xoá đi sau mỗi request. Giá trị này chỉ tồn tại cho tới request tiếp theo, thường được dùng để báo lỗi, notification... Cách sử dụng tương tự session. Thông tin của flash thường được hiển thị trong view. [(Tham khảo)](https://guides.rubyonrails.org/v5.2/action_controller_overview.html#the-flash)
+          ```ruby
+          class LoginsController < ApplicationController
+            def destroy
+              session[:current_user_id] = nil
+              flash[:notice] = "You have successfully logged out."
+              redirect_to root_url
+            end
+          end
+          ```
+
       - **`Cookies`**
+        - Web app có thể lưu một lượng nhỏ data trên client thông qua cookies. Data này có thể sử dụng trên nhiều requests hoặc nhiều sessions khác nhau. Chúng ta có thể set expired, mã hoá ... cho cookie nếu cần. Cú pháp sử dụng tương tự session.
+          ```ruby
+          class CommentsController < ApplicationController
+            def new
+              # Auto-fill the commenter's name if it has been stored in a cookie
+              @comment = Comment.new(author: cookies[:commenter_name])
+            end
+
+            def create
+              @comment = Comment.new(params[:comment])
+              if @comment.save
+                flash[:notice] = "Thanks for your comment!"
+                if params[:remember_name]
+                  # Remember the commenter's name.
+                  cookies[:commenter_name] = @comment.author
+                else
+                  # Delete cookie for the commenter's name cookie, if any.
+                  cookies.delete(:commenter_name)
+                end
+                redirect_to @comment.article
+              else
+                render action: "new"
+              end
+            end
+          end
+          ```
 
 
 ### II. Cấu hình cho Rails Router [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/routing.html)
@@ -60,6 +144,7 @@
       **1. CRUD, Verbs and Actions**
       - Khi bạn check `rake routes` bạn sẽ thấy sẽ có việc mapping kết hợp **HTTP Verbs** (GET, POST, PUT, PATCH, DELETE) và **URL** để dẫn đến một **action** cụ thể của một **controller** nào đó. Ví dụ:
         ```ruby
+          # Sử dụng resouces để tạo ra 7 routes
           resources :photos
         ```
 
@@ -85,6 +170,20 @@
           - ...
 
       **3. Singular Resources**
+      - Ta sử dụng singular resource bằng method `resource` thay vì `resources`. Singular resource không sử dụng params `id` để lấy data. Chỉ sinh ra 6 routes thay vì 7 routes (do không có index)
+        ```ruby
+          resources :profile
+        ```
+
+        | **HTTP Verb** | **Path**         | **Controller#Action** | **Used for**                          |
+        |---------------|------------------|-----------------------|---------------------------------------|
+        | GET           | /profile/new     | profile#new           | trả về một html form để tạo profile   |
+        | POST          | /profile         | profile#create        | nhận request chứa data để tạo profile |
+        | GET           | /profile/        | profile#show          | hiển thị một profile                  |
+        | GET           | /profile/edit    | profile#edit          | trả về một html form để edit profile  |
+        | PATCH/PUT     | /profile         | profile#update        | cập nhật một profile nào đó           |
+        | DELETE        | /profile         | profile#destroy       | xoá một profile                       |
+
 
       **4. Controller Namespaces và Routing**
 
@@ -134,8 +233,36 @@
         ```
 
       **5. Nested Resources**
+        - Chúng ta cũng có thể sử dụng các resouces lồng nhau để thể hiện mối quan hệ cha con giữa các resources.
+        ```ruby
+        # Giả sử chúng ta có 2 models tương ứng 2 tables.
+        # Một magazine (tạp chí) sẽ có nhiều trang ads (quảng cáo)
+        class Magazine < ApplicationRecord
+          has_many :ads
+        end
 
-      **6. Thêm các actions tuỳ chỉnh**
+        class Ad < ApplicationRecord
+          belongs_to :magazine
+        end
+        ```
+
+        ```ruby
+        # Ta có cấu trúc khai báo lồng bên dưới
+        # Chạy rake routes để kiểm tra các routes
+        resources :magazines do
+          resources :ads
+        end
+        ```
+
+        | **HTTP Verb** | **Path**                            | **Controller#Action** | **Used for**                                   |
+        |---------------|-------------------------------------|-----------------------|------------------------------------------------|
+        | GET           | /magazines/:magazine_id/ads	        | ads#index	            | hiển thị danh sách các ad của một magazine     |
+        | GET           | /magazines/:magazine_id/ads/new	    | ads#new	              | trả về một html form để tạo ad cho một magazine|
+        | POST          | /magazines/:magazine_id/ads	        | ads#create	          | tạo một ad cho một manazine                    |
+        | GET           | /magazines/:magazine_id/ads/:id	    | ads#show	            | hiển thị một ad cụ thể trong một magazine      |
+        | GET           | /magazines/:magazine_id/ads/:id/edit| ads#edit	            | trả về một html form để edit ads               |
+        | PATCH/PUT     | /magazines/:magazine_id/ads/:id	    | ads#update	          | cập nhật một ad của một magazine               |
+        | DELETE        | /magazines/:magazine_id/ads/:id	    | profile#destroy       | xoá một ads của một managezine                 |
 
   3. #### Non-Resource Routing là gì?
       **1. Bound Parameters**
