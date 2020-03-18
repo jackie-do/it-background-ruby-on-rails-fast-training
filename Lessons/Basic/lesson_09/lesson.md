@@ -262,7 +262,7 @@
         | GET           | /magazines/:magazine_id/ads/:id	    | ads#show	            | hiển thị một ad cụ thể trong một magazine      |
         | GET           | /magazines/:magazine_id/ads/:id/edit| ads#edit	            | trả về một html form để edit ads               |
         | PATCH/PUT     | /magazines/:magazine_id/ads/:id	    | ads#update	          | cập nhật một ad của một magazine               |
-        | DELETE        | /magazines/:magazine_id/ads/:id	    | profile#destroy       | xoá một ads của một managezine                 |
+        | DELETE        | /magazines/:magazine_id/ads/:id	    | ads#destroy           | xoá một ads của một managezine                 |
 
   3. #### Non-Resource Routing là gì?
       **1. Bound Parameters**
