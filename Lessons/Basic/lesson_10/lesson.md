@@ -81,6 +81,9 @@
       - Spacer Templates
 
   5. #### Layout
+      - Trong một website có rất nhiều trang có nội dung khác nhau nhưng bố cục layout giống hệt nhau. Thông thường ta chỉ thay đổi nội dung của một page mà vẫn giữ nguyên hoặc điều chỉnh một chút về layout. Ở trong Rails `layout` được sử dụng như là một template chung dựa vào đó ta render thêm các content phù hợp cho từng page.
+      - Thông thường một layout sẽ chứa các thẻ `<html></html>`, `<head></head>`, `<body></body>`, phần nội dung thay đổi sẽ nằm trong body. Các file css, javascript cần thiết sẽ được import trong thẻ head của layout thông qua **Asset Tag Helpers**
+      - Chúng ta có thể chỉ định layout cho từng controller, hoặc cho một action cụ thể. Nếu không có chỉ định gì thì layout sẽ tự động lấy `application`  ở app/views/layouts
 
   6. #### Các loại Helpers hữu ích [(Tham khảo)](https://guides.rubyonrails.org/v5.2/action_view_overview.html#overview-of-helpers-provided-by-action-view)
       - AssetTagHelper (quan trọng)
@@ -215,38 +218,140 @@
     > Cache-Control: no-cache <br/>
 
 ### III. Sử dụng các Form Helpers [(Tham Khảo)](https://guides.rubyonrails.org/v5.2/form_helpers.html)
+  - Form là thành phần được sử dụng phổ biến nhất để gửi dữ liệu từ một trang HTML lên server. Có một lưu ý nhỏ là theo chuẩn HTML standard thì form chỉ gửi data lên server bằng HTTP GET và POST.
+  - Các input tags sẽ là nơi nhận data từ người dùng và những data này sẽ được gửi lên server khi được submit. Data khi gửi lên sẽ có parameter name tương ứng `name` attribute trong input tags.
   1. Basic Form
-  ```HTML
-  <%= form_tag do %>
-    Form contents
-  <% end %>
-  ```
+      - Có 3 loại helpers giúp tạo form:
+          - `form_tag`
+          - `form_for`
+          - `form_with`
+      - Cách dùng một `form_tag` thông thường để tạo một form đơn giản.
 
-  ```html
-  <%= form_tag("/search", method: "get") do %>
-    <%= label_tag(:q, "Search for:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("Search") %>
-  <% end %>
-  ```
+        ```HTML
+        <!-- Trước khi render -->
+        <%= form_tag do %>
+          Form contents
+        <% end %>
 
-  ```html
-  <%= form_tag({controller: "people", action: "search"}, method: "get", class: "nifty_form") do %>
-    <%= label_tag(:q, "Search for:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("Search") %>
-  <% end %>
-  ```
+        <!-- Sau khi render -->
+        <form accept-charset="UTF-8" action="/" method="post">
+          <input name="utf8" type="hidden" value="&#x2713;" />
+          <input name="authenticity_token" type="hidden" value="J7CBxfHalt49OSHp27hblqK20c9PgwJ108nDHX/8Cts=" />
+          Form contents
+        </form>
+        ```
+        > Chúng ta có thể thấy, sau khi render sẽ có 1 form và bên trong nó có 2 input ẩn. Đối với input với name `authenticity_token` thì được sử dụng cho mục đích security đảm bảo form này được tạo ra từ server chống **Cross Site Request Forgery - CSRF** [(Tham khảo)](https://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf)
+
+      - Một số dạng form phổ biến
+        ```html
+        <!-- Search Form -->
+        <%= form_tag("/search", method: "get") do %>
+          <%= label_tag(:q, "Search for:") %>
+          <%= text_field_tag(:q) %>
+          <%= submit_tag("Search") %>
+        <% end %>
+
+        <!-- Sau khi render -->
+        <form accept-charset="UTF-8" action="/search" method="get">
+          <input name="utf8" type="hidden" value="&#x2713;" />
+          <label for="q">Search for:</label>
+          <input id="q" name="q" type="text" />
+          <input name="commit" type="submit" value="Search" />
+        </form>
+        ```
+      - `form_tag` chấp nhận 2 arguments:
+          - phần xác định `path` (đi đến route nào hoặc đi đến action của controller nào)
+          - một hash chứa các `options` (dùng để đặc tả HTTP method và các HTML attributes).
+          > Như đã nói ở trước, HTML standard chỉ chấp nhận HTTP `GET` và HTTP `POST` nhưng Rails có mẹo để biết form đó nên đi đến route dành cho HTTP `PUT`/`PATCH`/`DELETE` ... đó là thông qua key `method` trong `options`
+          ```HTML
+          <!-- Trước khi render  -->
+          <!-- PATH: { controller: "people", action: "search" } chỉ định controler và action-->
+          <!-- OPTIONS:  method: "get", class: "nifty_form" -->
+          form_tag({ controller: "people", action: "search" }, method: "get", class: "nifty_form")
+          <!-- Sau khi render  -->
+          <form accept-charset="UTF-8" action="/people/search" method="get" class="nifty_form">
+          </form>
 
 
-  2. Form Elements
+          <!-- Trước khi render  -->
+          <!-- PATH: people_search_path  chỉ định route bằng path_helper -->
+          <!-- OPTIONS:  method: "get", class: "nifty_form" -->
+          form_tag(people_search_path, method: "get", class: "nifty_form")
+          <!-- Sau khi render  -->
+          <form accept-charset="UTF-8" action="/user/search" method="get" class="nifty_form">
+          </form>
+          ```
+
+  2. Form Helpers [(Tham khảo)](https://guides.rubyonrails.org/v5.2/form_helpers.html#other-helpers-of-interest)
+      - Helpers hỗ trợ tạo các HTML Input. Các Form helpers này có tên theo dạng `*_tag`.
       - Checkboxes
+        ```HTML
+        <!-- Trước khi render  -->
+        <%= check_box_tag(:pet_dog) %>
+        <%= label_tag(:pet_dog, "I own a dog") %>
+        <%= check_box_tag(:pet_cat) %>
+        <%= label_tag(:pet_cat, "I own a cat") %>
+
+        <!-- Sau khi render  -->
+        <input id="pet_dog" name="pet_dog" type="checkbox" value="1" />
+        <label for="pet_dog">I own a dog</label>
+        <input id="pet_cat" name="pet_cat" type="checkbox" value="1" />
+        <label for="pet_cat">I own a cat</label>
+        ```
       - Radio Buttons
+        ```HTML
+        <!-- Trước khi render  -->
+        <%= radio_button_tag(:age, "child") %>
+        <%= label_tag(:age_child, "I am younger than 21") %>
+        <%= radio_button_tag(:age, "adult") %>
+        <%= label_tag(:age_adult, "I'm over 21") %>
+
+        <!-- Sau khi render  -->
+        <input id="age_child" name="age" type="radio" value="child" />
+        <label for="age_child">I am younger than 21</label>
+        <input id="age_adult" name="age" type="radio" value="adult" />
+        <label for="age_adult">I'm over 21</label>
+        ```
       - Text area
+        ```HTML
+        <!-- Trước khi render  -->
+        <%= text_area_tag(:message, "Hi, nice site", size: "24x6") %>
+
+        <!-- Sau khi render  -->
+        <textarea id="message" name="message" cols="24" rows="6">Hi, nice site</textarea>
+        ```
       - Password field
+        ```HTML
+        <!-- Trước khi render  -->
+        <%= password_field_tag(:password) %>
+
+        <!-- Sau khi render  -->
+        <input id="password" name="password" type="password" />
+        ```
       - Hidden field
+        ```HTML
+        <!-- Trước khi render  -->
+        <%= hidden_field_tag(:parent_id, "5") %>
+
+        <!-- Sau khi render  -->
+
+        ```
       - Search field
+        ```HTML
+        <!-- Trước khi render  -->
+        <%= search_field(:user, :name) %>
+
+        <!-- Sau khi render  -->
+        <input id="user_name" name="user[name]" type="search" />
+        ```
       - Phone field
+       ```HTML
+        <!-- Trước khi render  -->
+        <%= telephone_field(:user, :phone) %>
+
+        <!-- Sau khi render  -->
+        <input id="user_phone" name="user[phone]" type="tel" />
+      ```
       - Date field
       - url field
       - email field
@@ -282,10 +387,63 @@
       ```
 
   3. Model Object
-    - Mode Object Helpers
-    - Binding a Form to an Object
-    - Relying on Record Identification
-    - Sử dụng PATCH, PUT, DELETE trong một form
+      - Model Object Helpers
+          - Helpers cho phép tạo các HTML input dựa trên object (thông thường là một instance variable của một model).
+          - Khác với Form Helpers (ex: `text_field_tag`, `check_box_tag` ...) Model Object Helpers không có phần đuôi `_tag` (ex: `text_field`, `check_box` ...)
+          - Text Field: chấp nhận 2 arguments: name của một instance varible, name của một method của instance đó
+            ```HTML
+            <!-- Trước khi render -->
+            <%= text_field(:person, :name) %>
+            <!-- Sau khi render -->
+            <input id="person_name" name="person[name]" type="text" value="Henry"/>
+            ```
+            > ở ví dụ trên render text field dựa trên instance variable @person và value là @person.name
+
+      - Binding a Form to an Object
+          - Chúng ta có thể tạo một form dựa trên một object (thông thường là một instance variable của một model), các input tags tương ứng với attributes của object đó bằng cách sử dụng `form_for`
+            ```ruby
+            # app/controllers/articles_controller.rb
+            def new
+              @article = Article.new
+            end
+            ```
+
+            ```html
+            <!-- app/views/articles/new.html.erb -->
+
+            <!-- Trước khi render -->
+            <%= form_for @article, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+              <%= f.text_field :title %>
+              <%= f.text_area :body, size: "60x12" %>
+              <%= f.submit "Create" %>
+            <% end %>
+
+            <!-- Sau khi render -->
+            <form class="nifty_form" id="new_article" action="/articles" accept-charset="UTF-8" method="post">
+              <input name="utf8" type="hidden" value="&#x2713;" />
+              <input type="hidden" name="authenticity_token" value="NRkFyRWxdYNfUg7vYxLOp2SLf93lvnl+QwDWorR42Dp6yZXPhHEb6arhDOIWcqGit8jfnrPwL781/xlrzj63TA==" />
+              <input type="text" name="article[title]" id="article_title" />
+              <textarea name="article[body]" id="article_body" cols="60" rows="12"></textarea>
+              <input type="submit" name="commit" value="Create" data-disable-with="Create" />
+            </form>
+            ```
+            > - @article là một instace variable, thường là instance của một Model.
+            > - Sử dụng `url` để chỉ định routes/action muốn đến.
+            > - Lưu ý cách sử dụng `f` (form builder) để gọi các Model Object Helpers.
+      - Sử dụng PATCH, PUT, DELETE trong một form
+          - Như đã nói từ trước HTML Standard chỉ hỗ trợ gửi data từ form lên server bằng HTTP GET và POST vậy làm sao có thể sử dụng PATCH, PUT, DELETE ? Rails cho phép làm điều này bằng một hidden input `_method`, về mặt kỹ thuật data vẫn được gửi bằng HTTP POST nhưng khi Rails nhận request này thì nó sẽ điều hướng tới route dùng PUT/PATCH/DETELE thay vì điều hướng tới route dùng POST.
+            ```HTML
+            <!-- Trước khi render -->
+            form_tag(search_path, method: "patch")
+
+            <!-- Sau khi render -->
+            <form accept-charset="UTF-8" action="/search" method="post">
+              <input name="_method" type="hidden" value="patch" />
+              <input name="utf8" type="hidden" value="&#x2713;" />
+              <input name="authenticity_token" type="hidden" value="f755bb0ed134b76c432144748a6d4b7a7ddf2b71" />
+              ...
+            </form>
+            ```
 
   4. Date and Time Form Helpers
   5. Uploading Files
@@ -298,4 +456,8 @@
 
 
 ### V. Bài tập
-  1. xx
+  1. Có bao nhiêu cách controler trả về một responce? Cách nào phổ biến nhất?
+  2. Giả sử bạn có một controller `ProductsController` (ở tại app/controllers/) thì action `index` sẽ lấy file view ở đâu? Sử dụng layout ở đâu?
+  3. Theo HTML Standard thì data trong `<form>` được gửi tới server bằng cách gì? Khi nào thì gửi? Làm sao để gửi data trong form một action của một controller chỉ định?
+  4. Khác biết giữa Form Helpers và Modal Object Helpers là gì? Công dụng của Modal Object Helpers?
+
