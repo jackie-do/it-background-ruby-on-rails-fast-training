@@ -148,7 +148,7 @@
         @import 'footer';
         ```
 
-        - Extends (Kế thừa): định nghĩa ra một class, nếu class khác cần sử dụng thì extends bằng class kia. Tái sử dụng
+        - Extends (Kế thừa): định nghĩa ra một class, nếu class khác cần sử dụng thì extends bằng class kia. Tái sử dụng
         ```SCSS
         .title-box {
             color: #dacb46;
@@ -176,7 +176,7 @@
 ### II. Các CSS framework phổ biến
 1. #### Bulma
     1. Giới thiệu về Bulma ([Trang chủ](https://bulma.io/))
-        - Là một open source CSS framework, được sử dụng để design web. Sử dụng các CSS built-in components để thiết kế mobile-first design.
+        - Là một open source CSS framework, được sử dụng để design web. Sử dụng các CSS built-in components để thiết kế mobile-first design.
     2. Cài đặt Bulma
         - Cách 1: Download từ trang [bulma.io](https://bulma.io/) và include vào trang HTML để sử dụng
         - Cách 2: Chèn link vào HTML
@@ -188,7 +188,7 @@
 
     3. Tự học Bulma [(Link Tham Khảo)](https://bulma.io/documentation/)
         - Grid layout
-            - Adding Custom Width
+            - Adding Custom Width
             - Multiline Columns
             - Gaps
             - Nested Columns
@@ -233,6 +233,7 @@
     - Chủ đề bất kì: Giới thiệu bản thân, giới thiệu một ban nhạc ...
     - Sử dụng file `bulma.css` hoặc `bulma.min.css`, làm quen với một số class trong bulma.
     - Phải responsive (thay đổi chế độ hiển thị) cho màn hình di động.
+  2. Tạo một trang web tĩnh tương tự sử dụng Bootstrap.
 
 ### IV. Sách tham khảo
   - Learning Bulma - [Link](./../../../Books/html_css_book/learning-bulma-understand-responsive-mobile-first.pdf)
