@@ -35,6 +35,7 @@
   - HTML structure elements, những tag bắt buộc phải có của một trang web:
     - DOCTYPE `<!DOCTYPE html>`
     - html `<html> </html>`
+    - head `<head> </head>`
     - body `<body> </body>`
   - HTML head element, chứa những meta data cho một trang web. Element này không được hiển thị cho người dùng. Chứa các tags sau
     `<title> </title>`, `<style>`, `<meta>`, `<link>`, `<script>` và `<base>` [(Link tham khảo)](https://www.w3schools.com/html/html_head.asp)
