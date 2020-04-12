@@ -151,7 +151,7 @@ p {
 ### III. Bài tập
   1. HTML - Tạo trang web offline đầu tiên bằng HTML. [(Demo)](./exercises/exercise_01.html)
   2. HTML - Thêm metadata vào trang web ở bài tập 1. [(Demo)](./exercises/exercise_02.html)
-  3. HTML - Kiểm tra lỗi HTML bằng **Validator**. [(Demo)](./exercises/exercise_03.html)
+  3. HTML - Kiểm tra lỗi HTML bằng [**Validator**](https://validator.w3.org/). [(Demo)](./exercises/exercise_03.html)
   4. CSS - Sử dụng CSS cho một trang HTML bằng CSS Internal và CSS Inline. [(Demo)](./exercises/exercise_04.html)
       -  Lưu ý: độ ưu tiên của CSS thông thường sẽ theo thứ tự **CSS Inline > CSS Internal > CSS External**
   5. CSS - Sử dụng CSS cho một trang HTML bằng CSS External [(Demo)](./exercises/exercise_05.html)
