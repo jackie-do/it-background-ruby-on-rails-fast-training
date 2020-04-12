@@ -1,27 +1,34 @@
 # Buổi 7: Làm bài tập với Ruby
 
 ## Nội dung cần học
- - Làm quen với các loại dữ liệu phổ biến
- - Sử dụng Class và Module
+ - Ôn lại các loại dữ liệu phổ biến từ bài trước
  - Làm quen với việc sử dụng Iterator
  - Nhắc về Block
+ - Lập trình hướng đối tượng trong Ruby (OOP)
  - Bài tập
 
 -----
 
-### I. Làm quen với các loại dữ liệu phổ biến
+### I. Ôn lại các loại dữ liệu phổ biến từ bài trước
 1. #### String
+2. #### Number
+3. #### Boolean
+4. #### Symbol
+5. #### Range
+6. #### Array
+7. #### Hash
 
-### II. Sử dụng Class và Module
+### II. Làm quen với việc sử dụng Iterator
+
+### III. Nhắc về Block
+
+
+### IV. Lập trình hướng đối tượng trong Ruby (OOP)
 1. #### Sử dụng Class
   1. Kế thừa trong các Class
   2. Scope của các methods: private, public, protected
 1. #### Sử dụng Module
   1. Sử dụng mixin và lưu ý
-### III. Làm quen với việc sử dụng Iterator
-1. #### Các Iterator phổ biến
-
-### IV. Nhắc về Block
 
 ### V. Bài tập
   1. Làm quen với Number
@@ -193,7 +200,70 @@
       ```
 
   4. Làm quen với Hash
-      - Thực hiện các operations phổ biến: lấy giá trị dựa trên key, set giá trị mới, sorting, merge, xoá giá trị theo key, search theo value hoặc key
+      - Thực hiện các operations phổ biến: lấy giá trị dựa trên key, set giá trị mới, sorting, merge, list keys hoặc values, xoá giá trị theo key
       ```ruby
+      month_hash_1 = { jan: 1, feb: 2, mar: 3 }
+      month_hash_2 = { :jan => 1, :feb => 2, :mar => 3 }
+      month_hash_3 = { 'jan' => 1, 'feb' => 2, 'mar' => 3 }
+
+      # Lấy giá trị dựa trên key
+      month_hash_1[:jan]
+      month_hash_1[:april]
+      month_hash_2[:jan]
+      month_hash_3['jan']
+
+      # Set giá trị mới
+      month_hash_1[:jan] = 13
+      month_hash_1
+      month_hash_1[:april] = 4
+      month_hash_1
+      month_hash_1['may'] = 5
+
+      # Sorting
+      people_hash = { nam: 30, thom: 20, vy: 18, van: 22 }
+      people_hash.sort_by { |name, age| age }
+      people_hash.sort_by { |name, age| age }.reverse
+
+      people_hash_2 = { nam: { name: "Nam", age: 30 }, thom: { name: "Thơm", age: 20 }, vy: { name: "Vy", age: 18 }, van: { name: "Văn", age: 22 }}
+      people_hash_2.sort_by { |key, value| value[:age] }
+
+      # Merging
+      my_hash_1 = {a: 10, b: 20}
+      my_hash_2 = {c: 30, d: 40}
+      my_hash_1.merge(my_hash_2)
+      my_hash_1
+      my_hash_1.merge!(my_hash_2)
+
+      # List keys hoặc values của một hash
+      people_hash = { nam: 30, thom: 20, vy: 18, van: 22 }
+      people_hash.keys
+      people_hash.values
+
+      # Xoá giá trị theo key
+      people_hash = { nam: 30, thom: 20, vy: 18, van: 22 }
+      people_hash.delete(:thom)
+      people_hash
+      people_hash.delete(:vy)
+      people_hash
+
       ```
-      - adsf
+
+      - Loại bỏ các phần tử khỏi hash
+      ```ruby
+      people_hash = { nam: 30, thom: 20, vy: 18, van: 22 }
+      people_hash.reject { |key, value| value < 20 }
+      people_hash
+      people_hash.reject! { |key, value| value < 20 }
+      people_hash
+      ```
+  5. Chuyển đổi một chuỗi thời gian thành một hash (Sử dụng kiến thức String, Array và Hash)
+      - Input
+      ```ruby
+      my_string_time = "00:05:23.323"
+      my_hash_time = {}
+      ```
+      - Output
+      ```ruby
+      # my_hash_time
+      {"hh"=>"00", "mm"=>"05", "ss"=>"23", "s"=>"323"}
+      ```
