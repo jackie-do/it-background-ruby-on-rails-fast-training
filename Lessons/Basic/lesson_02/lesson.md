@@ -67,7 +67,7 @@
 
 <body>
   Background of body element will be powderblue
-  <h1> This text is red</h1>
+  <h1 id="demo"> This text is red</h1>
   <p> This text is blue </p>
 </body>
 
