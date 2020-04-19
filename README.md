@@ -59,7 +59,27 @@ Vi du
 3. Viết nội dung cần hỏi theo cú pháp markdown trong tab `Write`. Xem lại ở tab `Preview`
 4. Nhấn `Submit new issues` để hoàn tất.
 
-## IV. Sách tham khảo
+
+## IV. Nộp bài tập
+
+1. Đứng từ nhánh `master` checkout ra nhánh `exercies/<tên học viên>_<tên bài tập>`
+    - Ví dụ: cho một bài tập `exercies/khoa_nguyen_lesson_1_exercise_01`
+    - Ví dụ: cho tất cả bài tập của một bài học `exercies/khoa_nguyen_lesson_1_all_exercises`
+2. Vào trong thư mục `Submit_Exercies`, Chọn thư mục bài tập tương ứng ví dụ `lesson_02`
+3. Tạo thư mục con tương ứng với tên của bạn `Khoa_Nguyen`
+4. Làm bài tập trong thư mục mới, sau khi làm xong commit lại.
+5. Vào tab `Pull request`. Bấm vào nút `New Pull Request`. Tạo pull request cho nhánh của mình với tiêu đề theo format bên dưới
+```
+[Số khoá học][submit_exercies] - <Tên Học Viên> - <Tên bài tập>
+
+Vi du
+[K000][submit_exercies] - Khoa Nguyễn - Lesson 01 - Exercise 01
+
+```
+6. Nhấn `Create pull request` để hoàn tất.
+
+
+## . Sách tham khảo
 
 1. Tìm hiểu về HTML/CSS
     - [Sách HTML and CSS workshop](./Books/html_css_book/html-css-workshop-interactive-approach.pdf) - [Code Demo](./Books/html_css_book/code_demo.zip)
