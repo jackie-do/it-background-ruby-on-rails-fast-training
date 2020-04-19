@@ -293,7 +293,7 @@
             - Chuẩn đặt tên (naming convention):
               - Variable, Symbol, Method: sử dụng `snake_case`
               - Constant: chữ cái bắt đầu viết hoa
-            - Phạm vị (scope):
+            - Phạm vi (scope):
               - **Local Variable - var**. Tạo ra ở chỗ nào, sử dụng trong scope đó thôi.
               ```ruby
               # b là local variable, chỉ sử dụng trong method plus_10

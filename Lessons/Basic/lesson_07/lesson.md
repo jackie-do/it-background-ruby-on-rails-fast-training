@@ -19,14 +19,220 @@
 7. #### Hash
 
 ### II. Làm quen với việc sử dụng Iterator
+1. #### Each
+
 
 ### III. Nhắc về Block
 
 
 ### IV. Lập trình hướng đối tượng trong Ruby (OOP)
+  - Lập trình hướng đối tượng - Object Orientation Programming không phải là hướng phát triển duy nhất nhưng có là một trong nhưng hướng phổ biến nhất bên cạnh: Procedural Style như C hoặc Functional Programming như Golang ...
+  - Có một khái niệm cần lưu ý: **Mọi thứ trong Ruby đều là object**
+      - Mọi thứ đều có methods và các tính chất phổ biến của OOP
+
+1. #### Ôn lại các khái niệm cơ bản của OOP trong Ruby
+    1. Tính đóng gói (encapsulation) và che giấu thông tin (information hiding)
+        - Bảo vệ, giới hạn những thứ được nào được truy cập hoặc tác động nói nôm na là: xem hoặc sửa
+        - Nếu được truy cập thì sẽ được giới hạn bởi phạm vi truy cập: `public`, `private`, `protected`
+        ```ruby
+          # Define object Dog
+          class Dog
+              attr_accessor :weight, :height
+              attr_reader :price
+              # attr_writer
+
+            def initialize(weight, height, price, birth_day)
+              @weight = weight
+              @height = height
+              @price = price
+              @birth_day = birth_day
+            end
+
+            def update_price(new_price)
+              @price = new_price
+            end
+
+            def print_year_old
+              p "This dog is #{calculate_year_old} year old"
+            end
+
+            private
+
+            def calculate_year_old
+              Time.now.to_date.year - @birth_day.year
+            end
+
+            protected
+          end
+
+          # Code for Testing
+          require 'date'
+          birth_day = Date.parse('1995-01-01').to_date
+          a_dog = Dog.new(40, 1.2, 50_000, birth_day)
+          a_dog.price
+          a_dog.weight
+          a_dog.height
+          a_dog.calculate_year_old
+          a_dog.print_year_old
+
+          a_dog.instance_variables
+        ```
+    2. Tính kế thừa
+        - Class con sẽ kế thừa được các thuộc tính và method (được cho phép) từ class cha để sử dụng lại
+        - Lưu ý cách sử dụng keyword `super` (gọi lại toàn bộ xử lý và kết quả của method cha)
+          ```ruby
+          class Person
+            def initialize(name)
+              @name = name
+            end
+
+            def name
+              return @name
+            end
+          end
+
+          class Doctor < Person
+            def name
+              "Dr. " + super
+            end
+          end
+          ```
+    3. Tính đa hình (Overwrite và Overload)
+        - Trong Ruby cho phép overwrite method
+          ```ruby
+          "This is a string".length
+          class String
+            def length
+              20
+            end
+          end
+
+          "This is a string".length
+          ```
+        - Cơ bản thì Ruby không hỗ trợ overload như các ngôn ngữ khác (cùng 1 method name nhưng có số lượng parameters khác nhau từng method)
+          ```ruby
+          # Đây chỉ là trick, không phải official Overload
+          class Customer
+            def self.display_info(*args)
+              case args.size
+              when 1
+                puts "Their name is #{args[0]}"
+              when 2
+                puts "Their name is #{args[0]} #{args[1]}"
+              when 3
+                case args[2].class.name
+                when String
+                  puts "Their name is #{args[0]} #{args[1]} and their email address is #{args[2]}"
+                when Integer, Fixnum
+                  puts "Their name is #{args[0]} #{args[1]} and they are #{args[2]} years old"
+                end
+              end
+            end
+          end
+
+          # Code for testing
+          Customer.display_info("John")
+          Customer.display_info("John", "Smith");
+          Customer.display_info "John", "Smith", "j.smith@medium.com"
+          Customer.display_info "John", "Smith", 34
+          ```
+    4. Tính trừu tượng
+        - Tính đa hình được sử dụng khá ít trong ruby vì trong Ruby không có abtract class type như Java hay C# thay vào đó ta xây dựng 1 class như interface và cho class khác kế thừa.
+
+2. #### Phạm vi các biến (variable trong ruby)
+    - Chuẩn đặt tên (naming convention):
+        - Variable, Symbol, Method: sử dụng `snake_case`
+        - Constant: chữ cái bắt đầu viết hoa
+    1. **Local Variable - var**. Tạo ra ở chỗ nào, sử dụng trong scope đó thôi.
+      ```ruby
+      # b là local variable, chỉ sử dụng trong method plus_10
+      $ irb
+      a = 1
+      def plus_10(a)
+        b = 10
+        a + b
+      end
+      a
+      plus_10(a)
+      b
+      ```
+    2. **Global Variable - $var**. Một khi được tạo ra thì có thể được sử dụng ở mọi nơi. TRÁNH SỬ DỤNG
+      ```ruby
+      # $a là global variable, có thể sử dụng ở mọi nơi.
+      $ irb
+      $a = 1
+      def plus_10(a)
+        b = 10
+        $a + b
+      end
+      a
+      plus_10(a)
+      ```
+    3. **Instance Variable - @var**. Được tạo ra trong một class và có thể sử dụng ở mọi nơi trong instance class
+      ```ruby
+      # @color là instance variable
+      class Wall
+        def initialize
+          @color = 'white'
+        end
+
+        def color
+          @color
+        end
+        def paint_it(value)
+          @color = value
+        end
+      end
+      ```
+    4. **Class Variable - @@var**. Được tạo ra trong một class và có thể được sử dụng ở tất cả instance được tạo ra từ class này và kể cả chính bản thân nó.
+      ```ruby
+      class Square
+
+        def initialize
+          if defined?(@@number_of_squares)
+            @@number_of_squares += 1
+          else
+            @@number_of_squares = 1
+          end
+        end
+
+        # Class methods
+        def self.count
+          @@number_of_squares
+        end
+      end
+
+      # Code for testing
+      a = Square.new
+      b = Square.new
+      puts Square.count
+      ```
 1. #### Sử dụng Class
-  1. Kế thừa trong các Class
-  2. Scope của các methods: private, public, protected
+    1. Kế thừa trong các Class
+      - Sử dụng dấu `<` để định nghĩa một class kết thừa một class khác
+      ```ruby
+      class ParentClass
+        def method1
+          puts "Hello from method1 in the parent class"
+        end
+
+        def method2
+          puts "Hello from method2 in the parent class"
+        end
+      end
+
+      class ChildClass < ParentClass
+        def method2
+          puts "Hello from method2 in the child class"
+        end
+      end
+
+      my_object = ChildClass.new
+      my_object.method1
+      my_object.method2
+      ```
+
+    2. Scope của các methods: private, public, protected
 1. #### Sử dụng Module
   1. Sử dụng mixin và lưu ý
 
