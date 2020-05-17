@@ -45,7 +45,7 @@
         - Thao tác `css` của DOM object [(Tham khảo)](https://www.w3schools.com/jquery/jquery_css.asp)
     - Ajax
         - Tương tác trực tiếp với server bằng Javascript
-        - Load [(Tham khảo)](https://www.w3schools.com/jquery/jquery_css.asp)
+        - Load [(Tham khảo)](https://www.w3schools.com/jquery/jquery_ajax_load.asp)
         - Get/Post [(Tham khảo)](https://www.w3schools.com/jquery/jquery_ajax_get_post.asp)
 
 

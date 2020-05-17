@@ -77,7 +77,7 @@
     rvm list
     # Cài đặt thêm một phiên bản Ruby
     rvm install ruby # tự động cài bản mới nhất
-    rvm install ruby -v 2.6.3 # cài theo một phiên bản cụ thể
+    rvm install ruby-2.6.3 # cài theo một phiên bản cụ thể
     # Chuyển qua sử dụng một Ruby khác
     rvm use <ruby version>
     rvm use 2.7.0
