@@ -353,6 +353,33 @@
         - Oparation về range: `..`, `...`
         - Bang methods: các method với dấu chấm ! sẽ thay đổi giá trị gốc `upcase!`, `gsub!` ...
     6. Class và Module [(Class)](https://www.tutorialspoint.com/ruby/ruby_classes.htm) - [(Module)](https://www.tutorialspoint.com/ruby/ruby_modules.htm)
+        - Tạo một class với các attribute dùng methods: `attr_reader`, `attr_writter` and `attr_accessor` [(Tham khảo)](https://mixandgo.com/learn/ruby_attr_accessor_attr_reader_attr_writer)
+          ```ruby
+          class House
+            attr_reader :address, :area
+            attr_accessor :price
+
+            def initialize(address, area, price = 0)
+              @address = address
+              @area = area
+              @price = price
+            end
+          end
+
+          #
+          house_one = House.new("Quận Bình Thạnh", "10 x 20")
+          house_two = House.new("Quận 7", "10 x 20", 100_000_000)
+
+          house_one.address
+          house_one.area
+          house_one.price
+          house_one.price = 200_000_000
+          house_one.price
+
+          house_two.price
+          house_two.area = "20 x 30"
+          ```
+
         - Kế thừa giữa các class thế nào? Lưu ý về scope khi kế thừa khi làm việc với scope module
           ```ruby
           class Animal

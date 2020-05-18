@@ -462,7 +462,11 @@
       people_hash.reject! { |key, value| value < 20 }
       people_hash
       ```
-  5. Chuyển đổi một chuỗi thời gian thành một hash (Sử dụng kiến thức String, Array và Hash)
+  5. Tạo email dựa trên input nhập từ người dùng.
+      - Sử dụng `gets.chomp` để nhận input từ người nhập.
+      - Nhập first_name và last_name.
+      - Xuất ra email với format `first_name + last_name + @ + crosstech.com`
+  6. Chuyển đổi một chuỗi thời gian thành một hash (Sử dụng kiến thức String, Array và Hash)
       - Input
       ```ruby
       my_string_time = "00:05:23.323"
