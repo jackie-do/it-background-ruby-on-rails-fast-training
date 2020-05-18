@@ -353,8 +353,92 @@
         - Oparation về range: `..`, `...`
         - Bang methods: các method với dấu chấm ! sẽ thay đổi giá trị gốc `upcase!`, `gsub!` ...
     6. Class và Module [(Class)](https://www.tutorialspoint.com/ruby/ruby_classes.htm) - [(Module)](https://www.tutorialspoint.com/ruby/ruby_modules.htm)
-        - Kế thừa giữa các class thế nào?
-        - Trong Ruby không hỗ trợ đa kế thừa, nhưng có hỗ trợ mixin module, dùng thế nào?
+        - Kế thừa giữa các class thế nào? Lưu ý về scope khi kế thừa khi làm việc với scope module
+          ```ruby
+          class Animal
+            def say
+              p "A sound"
+            end
+          end
+
+          class Dog < Animal
+          end
+
+          class Duck < Animal
+            def say
+              p "Quoak"
+            end
+          end
+
+          #
+          animal = Animal.new
+          animal.say
+
+          dog = Dog.new
+          dog.say
+
+          duck = Duck.new
+          duck.say
+          ```
+        - Trong Ruby không hỗ trợ đa kế thừa, nhưng có hỗ trợ mixin module, dùng thế nào? Lưu ý khái niệm method chains
+          ```ruby
+          module MachineMethods
+            def repair
+              p "repair"
+            end
+
+            def create
+              p "create"
+            end
+
+            def check
+              p "check"
+            end
+          end
+
+          module ToolMethods
+            def start
+              p "start"
+            end
+
+            def stop
+              p "stop"
+            end
+          end
+
+          module GenerateMethods
+            def display_info
+              p "display_info"
+            end
+          end
+
+
+          class Cooker
+            prepend MachineMethods
+            include ToolMethods
+            extend GenerateMethods
+
+
+            def repair
+              p "cooker repair"
+            end
+
+            def start
+              p "cooker start"
+            end
+          end
+
+          #
+
+          cooker = Cooker.new
+          cooker.repair
+          cooker.create
+          cooker.check
+          cooker.start
+          cooker.stop
+
+          Cooker.display_info
+          ```
     7. Các câu lệnh điều kiện [(Link)](https://www.tutorialspoint.com/ruby/ruby_if_else.htm)
         - Câu lệnh với if: `if end`, `if else end`, `if elsif else end`
         - Câu lệnh với unless: `unless end`, `unless else end`
@@ -403,9 +487,11 @@
 
 ### V. Bài tập
   1. Cài đặt RVM và cài đặt Ruby phiên bản 2.6.3
-  2. Tìm hiểu về cách kế thừa giữa các Class trong Ruby.
-  3. Phân biệt được cách sử dụng và scope của `public`, `private`, `protected` trong Ruby.
-  4. Cách sử dụng Module trong Ruby. Sử dụng mixin là thế nào? Cách sử dụng các methods `include`, `extend` và `prepend` để "nhét" một Module vào trong một Class.
+  2. Tìm hiểu về cách kế thừa giữa các Class trong Ruby. Cho ví dụ cụ thể.
+  3. Nêu ra được cách sử dụng và scope của `public`, `private`, `protected` trong Ruby.
+  4. Cách sử dụng Module trong Ruby.
+      - Sử dụng mixin là thế nào? Cho ví dụ cụ thể.
+      - Cách sử dụng các methods `include`, `extend` và `prepend` để "nhét" một Module vào trong một Class. Cho ví dụ cụ thể.
   5. Làm quen với các loại dữ liệu phổ biến: String, Number, Array, Hash.
   6. Làm quen với các Iterator phổ biến: `each`, `map`, `reject`, `filter`.
 
