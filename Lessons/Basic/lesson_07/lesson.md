@@ -232,7 +232,140 @@
       my_object.method2
       ```
 
-    2. Scope của các methods: private, public, protected
+    2. Scope của các methods: public, private, protected
+        - **Public Methods**
+            - Đây là level mặc định cho mọi methods nếu không có đặc tả thêm. Public method có thể được gọi từ bên ngoài, không bị giới hạn.
+          ```ruby
+          class User
+            def initialize(email)
+              @email = email
+            end
+
+            def email
+              @email
+            end
+          end
+
+          # Example:
+          # email có thẻ được gọi từ bên ngoài
+
+          user = User.new("jk@gmail.com")
+          user.email
+          ```
+        - **Private Methods**
+            - Chỉ có thể được gọi bên trong class. *Lưu ý: khác với một số ngôn ngữ khác, private methods có thể kế thừa được*
+          ```ruby
+          class BankAccount
+            attr_accessor :transactions
+
+            def balance
+              calculate_balance
+            end
+
+            private
+
+            def calculate_balance
+              transactions.inject(0){|sum, txn| sum + txn }
+            end
+          end
+
+          # Example:
+          #
+
+          b = BankAccount.new
+          b.transactions = [20, -10, 30, -15]
+          b.balance
+          b.calculate_balance
+          ```
+        - **Protected Methods**
+            - Khá giống với private, protected không thể gọi trực tiếp từ bên ngoài mà chỉ sử dụng ở bên trong. Sự khác biệt của protected và private nằm ở `self`. Nếu không dùng self ta sẽ tìm gọi method từ class, còn nếu dùng self ta sẽ gọi từ object.
+            - Protected methods có thể được gọi trong các subclass (các class kế thừa) nhưng không thể gọi được từ các class khác
+          ```ruby
+          # Ví dụ về self
+          class User
+
+            def call_each
+              public_method
+              protected_method
+              private_method
+            end
+
+            def call_each_with_self
+              self.public_method
+              self.protected_method
+              self.private_method
+            end
+
+            def public_method
+              puts "This is a public method"
+            end
+
+            protected
+            def protected_method
+              puts "This is a protected method"
+            end
+
+            private
+            def private_method
+              puts "This is a private method"
+            end
+          end
+
+          # Example
+          user = User.new
+          user.call_each
+          user.call_each_with_self
+          ```
+
+          ```ruby
+          # Ví dụ về subclass
+          require 'digest'
+          class User
+            def initialize(email)
+              @email = email
+            end
+
+            def ==(other)
+              self.unique_id == other.unique_id
+            end
+            protected
+
+            def unique_id
+              Digest::MD5.hexdigest @email.downcase
+            end
+          end
+
+          # Example
+          u = User.new("test@example.com")
+          u2 = User.new("foo@example.com")
+          u3 = User.new("TesT@EXAMPLE.COM")
+          u == u2
+          u == u3
+
+          class Admin < User
+          end
+
+          class Department
+            def initialize(name)
+              @name = name
+            end
+
+            protected
+            def unique_id
+              Digest::MD5.hexdigest @name.downcase
+            end
+          end
+
+          # Example
+          admin = Admin.new("admin@example.com")
+          admin2 = Admin.new("test@example.com")
+          u == admin
+          u == admin2
+          u == sales
+
+          ```
+
+
 1. #### Sử dụng Module
   1. Sử dụng mixin và lưu ý
 
