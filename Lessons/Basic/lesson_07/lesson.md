@@ -137,6 +137,7 @@
           Customer.display_info "John", "Smith", 34
           ```
     4. Tính trừu tượng
+        - Trừu tượng hoá một đối tượng, chuyển đổi các thuộc tính, method của đối tượng thực tế thành class trong code. Xây dựng các thuộc tính và method cốt lõi của class.
         - Tính đa hình được sử dụng khá ít trong ruby vì trong Ruby không có abtract class type như Java hay C# thay vào đó ta xây dựng 1 class như interface và cho class khác kế thừa.
 
 2. #### Phạm vi các biến (variable trong ruby)
