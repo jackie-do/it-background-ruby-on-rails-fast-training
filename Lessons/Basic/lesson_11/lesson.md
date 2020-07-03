@@ -30,7 +30,7 @@
           end
           ```
           - Tạo một thay đổi với up và down (up là action khi apply migration, down là action khi gỡ migration ra)
-          > Thay đổi loại data của column `price` t
+          > Thay đổi loại data của column `price` từ integer thành str
           ```ruby
           class ChangeProductsPrice < ActiveRecord::Migration[5.0]
            def up
