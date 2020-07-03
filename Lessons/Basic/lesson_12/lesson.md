@@ -2,11 +2,11 @@
 
 ## Mục tiêu của bài tập 
  - Hiểu và sử dụng được các module M-V-C của Rails
- - Luyện tập các sử dụng các sub-module của Rails trong thực tế
+ - Luyện tập cách sử dụng các sub-module của Rails trong thực tế
  - Xây dựng cửa hàng bán sách online 
 
 -----
 
-### I. Tương tác với database và tables trong Rails 
+### I. Cấu trúc một cửa hàng s
  
 
