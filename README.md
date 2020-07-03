@@ -20,7 +20,9 @@ Giáo trình dạy Ruby on Rails cho sinh viên IT trong 48h (24 buổi, mỗi b
 - [Buổi 9: Giới thiệu module C - Controller trong MVC.](./Lessons/Basic/lesson_09/lesson.md)
 - [Buổi 10: Giới thiệu module V - View trong MVC.](./Lessons/Basic/lesson_10/lesson.md)
 - [Buổi 11: Giới thiệu module M - Model trong MVC.](./Lessons/Basic/lesson_11/lesson.md)
-- [Buổi 12: Làm việc tiếp với Model, sử dụng query interface, database migration.](./Lessons/Basic/lesson_12/lesson.md)
+- [Buổi 12: Bài tập lớn.](./Lessons/Basic/lesson_12/lesson.md)
+
+
 - [Buổi 13: Bắt đầu xây dựng trang web bán hàng (chưa có layout)](./Lessons/Basic/lesson_13/lesson.md)
 - [Buổi 14: Cập nhật view cho trang web bán hàng với CSS, cấu trúc lại các Views](./Lessons/Basic/lesson_14/lesson.md)
 - [Buổi 15: Tiếp tục cập nhật Views, thêm Javascript để xử lý các actions.](./Lessons/Basic/lesson_15/lesson.md)
