@@ -63,7 +63,58 @@
           # Cú pháp 2
           bin/rails g model Product name:string description:text
           ```
-      - Active Record Query Interface
+      - Để tương tác với data trong database thông thường chúng ta không sử dụng SQL thuần (raw SQL) mà thao tác thông qua **Active Record Query [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_querying.html)**
+          - Lấy một object từ một table trong database [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_querying.html#retrieving-objects-from-the-database)
+          > 1) Sử dụng `find` để tìm một client trong table clients bằng `id` của một record. Method này sẽ báo lỗi (exception) nếu không có kết quả. Nếu muốn tìm với id mà không báo lỗi khi tìm không có, ta có thể dùng `find_by`. Kết quả matched trả về luôn luôn là **một object**
+          ```ruby 
+          # Sử dụng 'find' để tìm một client bằng primary key (id) = 10.
+          client = Client.find(10)
+          # => #<Client id: 10, first_name: "Ryan">
+          
+          
+          # Sử dụng 'find_by'
+          client = Client.find_by(id: 10)
+          ```
+          
+          ```sql
+          /* SQL tương ứng */
+          SELECT * FROM clients WHERE (clients.id = 10) LIMIT 1
+          ```
+          
+          > 2) Sử dụng `first` để lấy một client đầu tiên trong table theo thứ tự (thứ tự default là primary key tăng dần). Method này trả về nil nếu không có kết quả matched. Kết quả matched trả về có thể là **một object** hoặc **một mảng object**
+          ```ruby
+          # Sử dụng với order default
+          client = Client.first
+          # => #<Client id: 1, first_name: "Lifo">
+          
+          # Sử dụng với order bằng first_name
+          client = Client.order(:first_name).first
+          # => #<Client id: 2, first_name: "Fifo">
+          
+          # Sử dụng để lấy một vài object đầu tiên
+          client = Client.first(3)
+          
+          ```
+          
+          ```sql
+          /* SQL tương ứng */
+          SELECT * FROM clients ORDER BY clients.id ASC LIMIT 1
+          
+          SELECT * FROM clients ORDER BY clients.first_name ASC LIMIT 1
+          
+          SELECT * FROM clients ORDER BY clients.id ASC LIMIT 3
+          ```
+          
+          > 3) Sử dụng `last` (tương tự `first` nhưng thứ tự ngược lại)
+          ```ruby
+          #
+          client = Client.last
+          # => #<Client id: 221, first_name: "Russel">
+          ```
+          
+          ```sql
+          SELECT * FROM clients ORDER BY clients.id DESC LIMIT 1
+          ```
 
 ### II. Tạo các loại quan hệ giữa các Models bằng Active Record Associations
   1. #### xx
