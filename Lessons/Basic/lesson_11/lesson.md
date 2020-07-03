@@ -197,12 +197,17 @@
           Client.order("orders_count ASC", "created_at DESC")
           ```
 
-### II. Tạo các loại quan hệ giữa các Models bằng Active Record Associations
-  1. #### xx
+### II. Tạo các loại quan hệ giữa các Models bằng Active Record Associations [(Tham khảo)](https://guides.rubyonrails.org/v5.2/association_basics.html)
+  1. #### belongs_to
+  2. #### has_one
+  3. #### has_many
+  4. #### has_one :through
+  5. #### has_many :through
+  
 
-### III. Tương tác với từng record trong table
-  1. #### Kiểm tra data với Active Record Validations
-  2. #### Xử lý các sự kiện với Active Record Callbacks
+### III. Tương tác với từng record trong table bằng Active Record [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_basics.html)
+### IV.  Kiểm tra data với Active Record Validations  [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_validations.html)
+### V.   Xử lý các sự kiện với Active Record Callbacks  [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_callbacks.html)
 
-### IV. Bài tập
-  1. xx
+### VI. Bài tập
+
