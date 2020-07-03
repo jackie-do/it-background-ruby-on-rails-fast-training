@@ -208,8 +208,62 @@
   
 
 ### III. Tương tác với từng record trong table bằng Active Record [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_basics.html)
+  1. #### create
+  2. #### read
+  3. #### update
+  4. #### delete
+  5. #### new   ???
+  6. #### save  ???
+  
+  
 ### IV.  Kiểm tra data với Active Record Validations  [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_validations.html)
+  1. #### `valid?` and `invalid?`
+  2. #### `errrors`
+  3. #### Validation helpers [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_validations.html)
+  
 ### V.   Xử lý các sự kiện với Active Record Callbacks  [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_callbacks.html)
+  Ví dụ cách sử dụng một callback
+  ```ruby
+  class User < ApplicationRecord
+    validates :login, :email, presence: true
 
+    before_validation :ensure_login_has_a_value
+
+    private
+      def ensure_login_has_a_value
+        if login.nil?
+          self.login = email unless email.blank?
+        end
+      end
+  end
+  ```
+  1. #### Callbacks khi tạo một object
+      + before_validation
+      + after_validation
+      + before_save
+      + around_save
+      + before_create
+      + around_create
+      + after_create
+      + after_save
+      + after_commit/after_rollback
+  2. #### Callbacks khi cập nhật một object
+      + before_validation
+      + after_validation
+      + before_save
+      + around_save
+      + before_update
+      + around_update
+      + after_update
+      + after_save
+      + after_commit/after_rollback
+  
+  3. #### Callbacks khi xóa một object 
+      + before_destroy
+      + around_destroy
+      + after_destroy
+      + after_commit/after_rollback
+  
+  
 ### VI. Bài tập
 
