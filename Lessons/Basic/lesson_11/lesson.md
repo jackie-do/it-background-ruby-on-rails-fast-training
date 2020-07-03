@@ -4,6 +4,8 @@
  - Tương tác với database và tables trong Rails
  - Tạo các loại quan hệ giữa các Models bằng Active Record Associations
  - Tương tác với từng record trong table
+ - Kiểm tra data với Active Record Validations
+ - Xử lý các sự kiện với Active Record Callbacks
  - Bài tập
 
 -----
