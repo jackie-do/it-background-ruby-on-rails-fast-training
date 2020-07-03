@@ -53,7 +53,7 @@
   2. #### Tương tác với data của các tables sử dụng các Models
       - Thông thường một model class là một mô hình hóa của một table trong database. Model class để tương tác với table, model instance để tương tác với row.
       - Đối với các ứng dụng quy mô nhỏ, thông thường các logic nghiệp vu thường được đặt ở model theo chuẩn MVC.
-      - **Cách để tạo một model[(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_migrations.html#model-generators)**
+      - **Cách để tạo một model [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_migrations.html#model-generators)**
           - Bạn có thể tạo model bằng cách tạo các file ruby bằng tay hoặc sử dụng model generator được hỗ trợ bởi rails. Xem ví dụ bên dưới
           > Tạo một model để quản lý 1 table có 2 columns: name và description
           ```bash
@@ -64,7 +64,7 @@
           bin/rails g model Product name:string description:text
           ```
       - Để tương tác với data trong database thông thường chúng ta không sử dụng SQL thuần (raw SQL) mà thao tác thông qua **Active Record Query [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_querying.html)**
-          - Lấy một object từ một table trong database [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_querying.html#retrieving-objects-from-the-database)
+          - Lấy một object (record) từ một table trong database [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_querying.html#retrieving-objects-from-the-database)
           > 1) Sử dụng `find` để tìm một client trong table clients bằng `id` của một record. Method này sẽ báo lỗi (exception) nếu không có kết quả. Nếu muốn tìm với id mà không báo lỗi khi tìm không có, ta có thể dùng `find_by`. Kết quả matched trả về luôn luôn là **một object**
           ```ruby 
           # Sử dụng 'find' để tìm một client bằng primary key (id) = 10.
@@ -114,6 +114,87 @@
           
           ```sql
           SELECT * FROM clients ORDER BY clients.id DESC LIMIT 1
+          ```
+          - Lấy nhiều object (records) từ một table trong database [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_querying.html#retrieving-multiple-objects-in-batches)
+          Để tránh tình trạng cạn kiệt bộ nhớ RAM do lấy quá nhiều records và chuyển thành object, thông thường ta sử dụng một số method bên dưới để lấy objects theo cụm.
+          > 1) Sử dụng `find_each` để lấy nhiều records theo cụm [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_querying.html#find-each) . Kết quả matched trả về có thể là **một collection chứa nhiều objects**
+          ```ruby
+          User.find_each do |user|
+            NewsMailer.weekly(user).deliver_now
+          end
+          ```
+          
+          - **Sử dụng `where` để thêm điều kiện để lọc ra các record phù hợp [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_querying.html#conditions)** 
+          > 1) Sử dụng `where` với string trực tiếp
+          ```ruby
+          # Tránh sử dụng string trực tiếp trong where sẽ bị SQL injection 
+          Client.where("orders_count = #{params[:orders]}")
+          # Nên dùng cú pháp bên dưới
+          Client.where("orders_count = ?", params[:orders])
+          ```
+          
+          
+          > 2) Sử dụng `where` với array input. Những dấu `?` sẽ được thay thế bằng giá trị tương ứng theo thứ tự.
+          ```ruby
+          Client.where("orders_count = ?", params[:orders])
+          
+          Client.where("orders_count = ? AND locked = ?", params[:orders], false)
+          ```
+          
+          
+          > 3) Sử dụng `where` với placeholders
+          ```ruby
+          Client.where("created_at >= :start_date AND created_at <= :end_date", {start_date: params[:start_date], end_date: params[:end_date]})
+          ```
+          
+          
+          > 4) Sử dụng `where` với hash
+          ```ruby
+           # So sánh bằng
+           Client.where(id: 1)
+           SELECT * FROM clients WHERE (clients.id = 1)
+           
+           # So sánh bao gồm
+           Client.where(id: [1,2,3])
+           SELECT * FROM clients WHERE clients.locked IN (1, 2, 3)
+    
+           # So sánh range (thường dùng cho ngày giờ)
+           Client.where(created_at: (Time.now.midnight - 1.day)..Time.now.midnight)
+           SELECT * FROM clients WHERE (clients.created_at BETWEEN '2008-12-21 00:00:00' AND '2008-12-22 00:00:00')
+
+           # So sánh phủ định với NOT
+           Client.where.not(locked: true)
+           SELECT * FROM clients WHERE (clients.locked != 1)
+ 
+           # Thêm điều kiên với OR
+           Client.where(locked: true).or(Client.where(orders_count: [1,3,5]))
+           SELECT * FROM clients WHERE (clients.locked = 1 OR clients.orders_count IN (1,3,5))
+          ```
+          
+          
+          - **Sử dụng `order` thay đổi thứ tự các record trước khi where được apply [(Tham khảo)](https://guides.rubyonrails.org/v5.2/active_record_querying.html#ordering)** 
+          > 1) Order 1 column
+          ```ruby
+          # created_at giảm dần
+          Client.order(created_at: :desc)
+          Client.order("created_at DESC")
+          
+          # OR
+          # created_at tăng dần 
+          Client.order(created_at: :asc)
+          Client.order("created_at ASC")
+          ```
+          
+          
+          > 2) Order nhiều columns
+          ```ruby
+          Client.order(orders_count: :asc, created_at: :desc)
+          # OR
+          Client.order(:orders_count, created_at: :desc)
+          # OR
+          Client.order("orders_count ASC, created_at DESC")
+          # OR
+          Client.order("orders_count ASC", "created_at DESC")
           ```
 
 ### II. Tạo các loại quan hệ giữa các Models bằng Active Record Associations
